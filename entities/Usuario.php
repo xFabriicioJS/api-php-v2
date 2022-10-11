@@ -106,7 +106,7 @@
             ":foto_usuario" => $this->getFotoUsuario()
         ));
         if(count($res)>0){
-            $this->setId($res[0]['id']);   
+            $this->setId($res[0]['id_usuario']);   
         }
     
         //retornará o id para o controller

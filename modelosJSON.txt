@@ -1,0 +1,27 @@
+
+REQUISIÇÕES USUÁRIOS
+
+
+ADICIONAR USUÁRIO <--OK
+{
+    "requisicao": "add",
+    "nome_usuario":"Fabricio Monteiro",
+    "email_usuario": "fabriciocostamonteiro@hotmail.com",
+    "id_nivel_usuario": 1,
+    "login_usuario": "xfabriicio",
+    "senha": "123456",
+    "foto_usuario": "teste.png"
+}
+
+LISTAR TODOS os USUÁRIOS <-- OK
+{
+    "requisicao": "listar",
+    "nome": ""
+}
+
+
+LISTAR TODOS os USUÁRIOS BUSCANDO POR NOME <-- OK
+{
+    "requisicao": "listar",
+    "nome": "Fabricio"
+}

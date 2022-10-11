@@ -2,7 +2,7 @@
 
 
 //Arquivo de configuração para conseguirmos acessar as classes.
-require("../config.php");    
+require("./config.php");    
 
 
 //include que pode ser necessário caso utilizemos PDO.

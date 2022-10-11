@@ -1,4 +1,4 @@
-<?php 
+<!-- <?php 
       class Plano{
         private $id;
         private $nome;
@@ -157,4 +157,4 @@
 
 
 
-?>
+?> -->
