@@ -90,12 +90,12 @@ public function setLocalAtend($local_atend){
 }
 
 //método construtor
-public function __construct($id="", $protocolo="", $descricao="", $titulo="", $idCliente="", $dataAbertura="", $dataFinalizacao="", $dataLimite="", $foto_erro="", $status="", $prioridade="", $local_atend=""){
-    $this->id = $id;
+public function __construct($protocolo="", $descricao="", $titulo="", $idCliente="", $dataAbertura="", $dataFinalizacao="", $dataLimite="", $foto_erro="", $status="", $prioridade="", $local_atend=""){
     $this->protocolo = $protocolo;
     $this->descricao = $descricao;
     $this->titulo = $titulo;
-    $this->idCliente = $idCliente;
+    $this->idCliente = 
+    $idCliente;
     $this->dataAbertura = $dataAbertura;
     $this->dataFinalizacao = $dataFinalizacao;
     $this->dataLimite = $dataLimite;
@@ -213,6 +213,14 @@ public static function getList(){
     $sql = new Sql();
 
     return $sql->select("SELECT * FROM tbchamados ORDER BY titulo_chamado");
+}
+
+public static function getAllChamadosByCliente($_clienteId){
+    $sql = new Sql();
+
+    return $sql->select("SELECT * FROM tbchamados WHERE idCliente = :IDCLIENTE ORDER BY titulo_chamado", array(
+        ":IDCLIENTE" => $_clienteId
+    ));
 }
 
 
