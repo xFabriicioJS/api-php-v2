@@ -25,3 +25,30 @@ LISTAR TODOS os USUÁRIOS BUSCANDO POR NOME <-- OK
     "requisicao": "listar",
     "nome": "Fabricio"
 }
+
+
+
+REQUISIÇÕES NIVEIS
+
+ADICIONAR NIVEL
+{
+    "requisicao": "add",
+    "nome": "TesteNivel"
+}
+
+
+LISTAR TODOS os NIVEIS <-- OK
+{
+    "requisicao": "listar",
+    "nome": ""
+}
+
+EXCLUIR NIVEL
+
+{
+    "requisicao":"excluir",
+    "id_nivel": 5
+}
+
+
+
