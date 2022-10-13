@@ -10,7 +10,7 @@ class Chamado{
     private $dataFinalizacao; 
     private $dataLimite; 
     private $foto_erro;
-    private $status = "EM ABERTO";
+    private $status;
     private $prioridade;
     private $local_atend;    
 
@@ -47,7 +47,7 @@ public function setIdCliente($idCliente){
     $this->idCliente = $idCliente;
 }
 public function getDataAbertura(){
-    return new DateTime();
+    return $this->dataAbertura;
 }
 public function setDataAbertura($dataAbertura){
     $this->dataAbertura = $dataAbertura;
@@ -59,7 +59,7 @@ public function setDataFinalizacao($dataFinalizacao){
     $this->dataFinalizacao = $dataFinalizacao;
 }
 public function getDataLimite(){
-    return new DateTime('+ 1 month');
+    return $this->dataLimite;
 }
 public function setDataLimite($dataLimite){
     $this->dataLimite = $dataLimite;
@@ -151,21 +151,24 @@ public function insert(){
     $protocoloUnico = uniqid();
 
     $sql = new Sql();
-    $results = $sql->select("CALL sp_chamados_insert(:PROT, :DESC, :TIT, :IDCLI, :DATAAB, :DATALIM, :FOTO, :STAT, :PRIOR, :LOCAL)", array(
+    $results = $sql->select("CALL sp_chamado_insert(:PROT, :DESC, :TIT, :IDCLI, :DATAAB, :DATALIM, :FOTO, :STAT, :PRIOR, :LOCAL)", array(
         ":PROT"=>$protocoloUnico,
         ":DESC"=>$this->getDescricao(),
         ":TIT"=>$this->getTitulo(),
         ":IDCLI"=>$this->getIdCliente(),
-        ":DATAAB"=>$this->getDataAbertura()->format("Y-m-d H:i:s"),
-        ":DATALIM"=>$this->getDataLimite()->format("Y-m-d H:i:s"),
+        ":DATAAB"=>$this->getDataAbertura(),
+        ":DATALIM"=>$this->getDataLimite(),
         ":FOTO"=>$this->getFotoErro(),
         ":STAT"=>$this->getStatus(),
         ":PRIOR"=>$this->getPrioridade(),
         ":LOCAL"=>$this->getLocalAtend()
     ));
     if(count($results) > 0){
-        $this->setData($results[0]);
+        $this->setId($results[0]['id_chamado']);
     }
+    //retornarará o id do chamado instanciado para o controlador
+    return $this->getId();
+    
 }
 
 

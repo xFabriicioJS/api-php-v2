@@ -51,4 +51,30 @@ EXCLUIR NIVEL
 }
 
 
+REQUISIÇÕES CHAMADOS
+
+ADICIONAR CHAMADO <--- OK
+
+{
+    "requisicao": "add",
+    "titulo": "Teste",
+    "descricao": "dsadasdasdas",
+    "id_cliente": 1,
+    "data_abertura": "2022-10-13 18:29:10",
+    "data_limite": "2022-10-13 20:29:10",
+    "status": "Aguardando contato",
+    "local_atend": "Remoto",
+    "prioridade": "Alta",
+    "foto_erro_chamado": "teste.png"
+}
+
+LISTAR TODOS os CHAMADOS <--- OK
+
+{
+  "requisicao": "listar",
+  "titulo": ""
+}
+
+
+
 

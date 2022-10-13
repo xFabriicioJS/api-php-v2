@@ -29,32 +29,20 @@ if($postjson['requisicao'] == 'add'){
     
     
     $chamado = new Chamado(
-          $postjson['descricao'], $postjson['titulo'], $postjson['id_cliente'], $postjson['data-abertura'], null, $postjson['data_limite'], $postjson['foto_erro'], $postjson['status'], $postjson['prioridade'], $postjson['local_atend']
+          $postjson['descricao'], $postjson['titulo'], $postjson['id_cliente'], $postjson['data_abertura'], null, $postjson['data_limite'], $postjson['foto_erro_chamado'], $postjson['status'], $postjson['prioridade'], $postjson['local_atend']
     );
 
-    $id = $cliente->insert();
+    $id = $chamado->insert();
 
     if(isset($id)){
         $result = json_encode(array('success' => true, 'id' => $id));
     }else{
-        $result = json_encode(array('success' => false, 'msg' => "Ocorreu uma falha ao inserir o cliente!"));
+        $result = json_encode(array('success' => false, 'msg' => "Ocorreu uma falha ao inserir o chamado!"));
         echo $id;
     }
 
     echo $result;
 }
-
-
-// else if($postjson['requisicao'] == 'addImagem'){
-//     if($_FILES['avatar']){
-//         $avatar_name = $_FILES["avatar"]["name"];
-//         $avatar_tmp_name = $_FILES["avatar"]["tmp_name"];
-    
-//         $pasta_img = "./images/". $avatar_name;
-//         move_uploaded_file($avatar_tmp_name, $pasta_img);    
-//         }
-// }
-
 
 // Final requisição add
 
