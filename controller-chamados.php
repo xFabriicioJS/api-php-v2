@@ -2,7 +2,7 @@
 
 
 //Arquivo de configuração para conseguirmos acessar as classes.
-require("../config.php");    
+require("./config.php");    
 
 
 //include que pode ser necessário caso utilizemos PDO.
@@ -29,7 +29,7 @@ if($postjson['requisicao'] == 'add'){
     
     
     $chamado = new Chamado(
-         $postjson['protocolo'], $postjson['descricao'], $postjson['titulo'], $postjson['id_cliente'], $postjson['data-abertura'], null, $postjson['data_limite'], $postjson['foto_erro'], $postjson['status'], $postjson['prioridade'], $postjson['local_atend']
+          $postjson['descricao'], $postjson['titulo'], $postjson['id_cliente'], $postjson['data-abertura'], null, $postjson['data_limite'], $postjson['foto_erro'], $postjson['status'], $postjson['prioridade'], $postjson['local_atend']
     );
 
     $id = $cliente->insert();
@@ -130,7 +130,7 @@ if($postjson['requisicao'] == 'add'){
 
     }
     //final do excluir
-    else if($postjson['requisicao'] == 'findAllByClienteId'){
+    else if($postjson['requisicao'] == 'listarTodosPorCliente'){
 
        $res = Chamado::getAllChamadosByCliente($postjson['id_cliente']);
         

@@ -8,7 +8,7 @@ class Chamado{
     private $idCliente;
     private $dataAbertura;
     private $dataFinalizacao; 
-    private $dataLimite = new DateTime('+ 1 month'); 
+    private $dataLimite; 
     private $foto_erro;
     private $status = "EM ABERTO";
     private $prioridade;
@@ -90,9 +90,7 @@ public function setLocalAtend($local_atend){
 }
 
 //método construtor
-public function __construct($id="", $protocolo="", $descricao="", $titulo="", $idCliente="", $dataAbertura="", $dataFinalizacao="", $dataLimite="", $foto_erro="", $status="", $prioridade="", $local_atend=""){
-    $this->id = $id;
-    $this->protocolo = $protocolo;
+public function __construct($descricao="", $titulo="", $idCliente="", $dataAbertura="", $dataFinalizacao="", $dataLimite="", $foto_erro="", $status="", $prioridade="", $local_atend=""){
     $this->descricao = $descricao;
     $this->titulo = $titulo;
     $this->idCliente = $idCliente;
@@ -105,6 +103,16 @@ public function __construct($id="", $protocolo="", $descricao="", $titulo="", $i
     $this->local_atend = $local_atend;
 }
 
+
+public static function getAllChamadosByCliente($id){
+    $sql = new Sql();
+
+    $results = $sql->select("SELECT * FROM tbchamados WHERE id_cliente_chamado = :ID", array(
+        ":ID"=>$id
+    ));
+
+    return $results;
+}
 
 
 
@@ -140,10 +148,11 @@ public function setData($data){
 public function insert(){
 
 
+    $protocoloUnico = uniqid();
 
     $sql = new Sql();
     $results = $sql->select("CALL sp_chamados_insert(:PROT, :DESC, :TIT, :IDCLI, :DATAAB, :DATALIM, :FOTO, :STAT, :PRIOR, :LOCAL)", array(
-        ":PROT"=>$this->getProtocolo(),
+        ":PROT"=>$protocoloUnico,
         ":DESC"=>$this->getDescricao(),
         ":TIT"=>$this->getTitulo(),
         ":IDCLI"=>$this->getIdCliente(),
