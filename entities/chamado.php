@@ -227,11 +227,12 @@ public static function getList(){
     return $sql->select("SELECT * FROM tbchamados ORDER BY titulo_chamado");
 }
 
-
-public static function search($_titulo){
+//método responsável por listar os chamados de acordo com o tipo da pesquisa, e o termo pesquisado que virá como parâmetro
+public static function search($tipoPesquisa, $termo){
     $sql = new Sql();
-    return $sql->select("SELECT * FROM tbchamados WHERE titulo_chamaod LIKE :NOME ORDER BY titulo_chamado", array(
-        ":NOME" => "%".$_titulo."%"
+    return $sql->select("SELECT * FROM tbchamados WHERE :TIPOPESQUISA LIKE :NOME ORDER BY :TIPOPESQUISA", array(
+        ":NOME" => "%".$termo."%",
+        ":TIPOPESQUISA" => $tipoPesquisa
     ));
 }
 
