@@ -228,12 +228,19 @@ public static function getList(){
 }
 
 //método responsável por listar os chamados de acordo com o tipo da pesquisa, e o termo pesquisado que virá como parâmetro
-public static function search($tipoPesquisa, $termo){
+public static function search($_tipoPesquisa, $_termo){
     $sql = new Sql();
-    return $sql->select("SELECT * FROM tbchamados WHERE :TIPOPESQUISA LIKE :NOME ORDER BY :TIPOPESQUISA", array(
-        ":NOME" => "%".$termo."%",
-        ":TIPOPESQUISA" => $tipoPesquisa
+
+    // echo "SELECT * FROM tbchamados WHERE ".$_tipoPesquisa." LIKE %".$_termo."% ORDER BY titulo_chamado";
+
+     return $sql->select("SELECT * FROM tbchamados WHERE $_tipoPesquisa LIKE :TERMO", array(
+        ":TERMO"=>"%".$_termo."%"
     ));
+
+
+
+    
+
 }
 
 }
