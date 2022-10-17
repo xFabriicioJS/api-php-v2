@@ -1,6 +1,4 @@
 <?php
-
-
 //Arquivo de configuração para conseguirmos acessar as classes.
 require("./config.php");
 
@@ -14,7 +12,7 @@ $postjson = json_decode(file_get_contents('php://input', true), true);
 
 if ($postjson['requisicao'] == 'add') {
 
-    $descarte = new Descarte($postjson['protocolo'], $postjson['descricao'], $postjson['nome_hard'], $postjson['id_cliente'], $postjson['data_abertura'], $postjson['data_retirada'], $postjson['prazo'], $postjson['foto'], $postjson['status']);
+    $descarte = new Descarte($postjson['descricao'], $postjson['nome_hard'], $postjson['id_cliente'], $postjson['data_abertura'],$postjson['prazo'], $postjson['foto'], $postjson['status']);
 
     $id = $descarte->insert();
 
@@ -40,12 +38,13 @@ else if ($postjson['requisicao'] == 'listar') {
             'id_descarte' => $res[$i]['id_descarte'],
             'protocolo' => $res[$i]['protocolo_descarte'],
             'descricao' => $res[$i]['descri_descarte'],
-            'nome_hardware' => $res[$i]['nome_hard_descarte'],
+            'nome_hardware' => $res[$i]['nome_hard_chamado'],
             'id_cliente' => $res[$i]['id_cliente_descarte'],
             'data_abertura' => $res[$i]['data_abertura_descarte'],
             'data_retirada' => $res[$i]['data_retirada_descarte'],
             'prazo' => $res[$i]['prazo_retirada_descarte'],
-            'foto_hardware' => $res[$i]['foto_hard_descarte']
+            'foto_hardware' => $res[$i]['foto_hard_descarte'],
+            'status'=> $res[$i]['status_descarte']
         );
     }
     if (count($res)) {
@@ -104,7 +103,7 @@ else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
             'id_descarte' => $res[$i]['id_descarte'],
             'protocolo' => $res[$i]['protocolo_descarte'],
             'descricao' => $res[$i]['descri_descarte'],
-            'nome_hardware' => $res[$i]['nome_hard_descarte'],
+            'nome_hardware' => $res[$i]['nome_hard_chamado'],
             'id_cliente' => $res[$i]['id_cliente_descarte'],
             'data_abertura' => $res[$i]['data_abertura_descarte'],
             'data_retirada' => $res[$i]['data_retirada_descarte'],

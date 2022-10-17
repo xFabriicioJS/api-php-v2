@@ -76,5 +76,31 @@ LISTAR TODOS os CHAMADOS <--- OK
 }
 
 
+ADD DESCARTE <---- OK
+{
+  "requisicao": "add",
+  "descricao": "testeDescricao",
+  "nome_hard": "testeNome",
+  "id_cliente": 1,
+  "data_abertura": "2022-10-10 08:00:00",
+  "prazo": "2022-10-10",
+  "foto": "teste.png",
+  "status": "TesteStatus"
+}
+
+LISTAR TODOS os DESCARTES <--- OK
+{
+  "requisicao": "listar"
+}
+
+LISTAR TODOS os DESCARTES por CLIENTE (ID)
+
+{
+  "requisicao": "listarTodosPorCliente",
+  "id_cliente": 1
+}
+
+
+
 
 

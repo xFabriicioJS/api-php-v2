@@ -78,13 +78,11 @@ class Descarte{
 
     // método construtor
 
-    public function __construct($_protocolo, $_descricao, $_nome_hard, $_id_cliente, $_data_abertura, $_data_retirada, $_prazo, $_foto, $_status){
-        $this->protocolo = $_protocolo;
+    public function __construct($_descricao, $_nome_hard, $_id_cliente, $_data_abertura,$_prazo, $_foto, $_status){
         $this->descricao = $_descricao;
         $this->nome_hard = $_nome_hard;
         $this->id_cliente = $_id_cliente;
         $this->data_abertura = $_data_abertura;
-        $this->data_retirada = $_data_retirada;
         $this->prazo = $_prazo;
         $this->foto = $_foto;
         $this->status = $_status;
@@ -145,7 +143,7 @@ class Descarte{
     public static function findAll(){
         $sql = new Sql();
 
-        return $sql->select("SELECT * FROM tb_descarte ORDER BY id_descarte DESC");
+        return $sql->select("SELECT * FROM tbdescarte ORDER BY id_descarte DESC");
     }
 
     // função responsável por listar todos os descartes de um único cliente
