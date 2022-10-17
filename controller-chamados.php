@@ -61,8 +61,6 @@ else if ($postjson['requisicao'] == 'listar') {
 
     if ($postjson['titulo'] == '' && $postjson['protocolo'] == '' && $postjson['descricao'] == '' ) {
         $res = Chamado::getList();
-        echo 'caiu no get list';
-        var_dump($res);
     } else if($postjson['protocolo'] != ''){
         $res = Chamado::search('protocolo_chamado', $postjson['protocolo']);
     } else if($postjson['descricao'] != ''){

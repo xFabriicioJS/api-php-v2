@@ -150,7 +150,7 @@ class Descarte{
 
     // função responsável por listar todos os descartes de um único cliente
 
-    public function findAllDescartesById($_id){
+    public static function findAllDescartesByIdCliente($_id){
         $sql = new Sql();
 
         $results = $sql->select("SELECT * FROM tbdescarte WHERE id_cliente_descarte = :ID", array(
