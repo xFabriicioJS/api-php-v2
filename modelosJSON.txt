@@ -104,6 +104,20 @@ LISTAR TODOS os CHAMADOS <--- OK
 }
 
 
+CLIENTES - ADICIONAR CLIENTE <---- OK 
+{
+  "requisicao": "add",
+  "nome": "Fabricio",
+  "cpf": "3933201201",
+  "telefone": "1289473943",
+  "cnpj": "",
+  "razaoSocial": "",
+  "idTipo": 1,
+  "email": "fa@hotmail.com",
+  "senha": "123"
+}
+
+
 
 
 

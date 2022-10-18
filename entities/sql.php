@@ -23,7 +23,9 @@ class Sql extends PDO{
     }
     public function select($comandoSql, $params = array()){
         
+
         $cmd = $this->querySql($comandoSql, $params);
+        
         // $cmd->debugDumpParams();
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
 

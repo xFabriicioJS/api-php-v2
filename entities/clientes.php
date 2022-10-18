@@ -1,6 +1,6 @@
 <?php 
 
-class Cliente{
+class Clientes{
  
         private $id;
         private $nome;
@@ -87,7 +87,7 @@ class Cliente{
     public function loadById($id){
         $sql = new Sql();
 
-        $result = $sql->select("SELECT * FROM tbclientes WHERE id = :ID", array(
+        $result = $sql->select("SELECT * FROM tbcliente WHERE id = :ID", array(
             ":ID"=>$id
         ));
         if(count($result) > 0){
@@ -97,15 +97,15 @@ class Cliente{
 
     //Função para setar Dados
     public function setData($data){
-        $this->setId($data['id']);
-        $this->setNome($data['nome']);
-        $this->setCpf($data['cpf']);
-        $this->setTelefone($data['telefone']);
-        $this->setCnpj($data['cnpj']);
-        $this->setRazaoSocial($data['razao_social']);
-        $this->setIdTipo($data['id_tipo_cliente']);
-        $this->setEmail($data['email']);
-        $this->setSenha($data['senha']);
+        $this->setId($data['id_cliente']);
+        $this->setNome($data['nome_cliente']);
+        $this->setCpf($data['cpf_cliente']);
+        $this->setTelefone($data['telefone_cliente']);
+        $this->setCnpj($data['cnpj_cliente']);
+        $this->setRazaoSocial($data['razao_social_cliente']);
+        $this->setIdTipo($data['id_tipo_cliente_cliente']);
+        $this->setEmail($data['email_cliente']);
+        $this->setSenha($data['senha_cliente']);
     }
 
 
@@ -125,7 +125,7 @@ class Cliente{
             ":senha_cliente" => $this->getSenha()
         ));
         if(count($res)>0){
-            $this->setId($res[0]['id']);   
+            $this->setId($res[0]['id_cliente']);   
         }
         //retornará o id para o controller
         return $this->getId();
@@ -138,7 +138,7 @@ class Cliente{
         // Pegando a senha que vier no json e codificando-a
         $senhaCrypt = password_hash($this->getSenha(), PASSWORD_DEFAULT);
 
-        $res = $sql->query("UPDATE tbclientes SET nome_cliente = :NOME, cpf_cliente = :CPF, telefone_cliente = :TELEFONE, cnpj_cliente = :CNPJ, razao_social = :RAZAOSOCIAL, id_tipo_cliente = :IDTIPO, email_cliente = :EMAIL, senha_cliente = :SENHA WHERE id = :ID", array(
+        $res = $sql->query("UPDATE tbcliente SET nome_cliente = :NOME, cpf_cliente = :CPF, telefone_cliente = :TELEFONE, cnpj_cliente = :CNPJ, razao_social = :RAZAOSOCIAL, id_tipo_cliente = :IDTIPO, email_cliente = :EMAIL, senha_cliente = :SENHA WHERE id = :ID", array(
             ":NOME" => $this->getNome(),
             ":ID" => $this->getId(),
             ":CPF" => $this->getCpf(),
@@ -165,7 +165,7 @@ class Cliente{
         $sql = new Sql();
 
         //precisamos instanciar um usuário para deleta-lo
-        $sql->query("DELETE FROM tbclientes WHERE id = :id", array(":id"=>$this->getId()));
+        $sql->query("DELETE FROM tbcliente WHERE id = :id", array(":id"=>$this->getId()));
     }
 
     //Função par listar todos os clientes
@@ -173,13 +173,13 @@ class Cliente{
     public static function getList(){
         $sql = new Sql();
 
-        return $sql->select("SELECT * FROM tbclientes ORDER BY nome_cliente");
+        return $sql->select("SELECT * FROM tbcliente ORDER BY nome_cliente");
     }
 
     
     public static function search($_nome){
         $sql = new Sql();
-        return $sql->select("SELECT * FROM tbclientes WHERE nome_cliente LIKE :NOME ORDER BY nome_cliente", array(
+        return $sql->select("SELECT * FROM tbcliente WHERE nome_cliente LIKE :NOME ORDER BY nome_cliente", array(
             ":NOME" => "%".$_nome."%"
         ));
     }
@@ -189,7 +189,7 @@ class Cliente{
 
         $senhaCrypt = password_hash($_senha, PASSWORD_DEFAULT);
 
-        $res = $sql->select("SELECT * FROM tbclientes WHERE email_cliente = :EMAIL AND senha_cliente = :SENHA", array(
+        $res = $sql->select("SELECT * FROM tbcliente WHERE email_cliente = :EMAIL AND senha_cliente = :SENHA", array(
             ":EMAIL" => $_user,
             ":SENHA" => $senhaCrypt
         ));

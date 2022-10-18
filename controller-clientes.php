@@ -2,7 +2,7 @@
 
 
 //Arquivo de configuração para conseguirmos acessar as classes.
-require("../config.php");    
+require("./config.php");    
 
 
 //include que pode ser necessário caso utilizemos PDO.
@@ -29,7 +29,7 @@ if($postjson['requisicao'] == 'add'){
     $senhaCrypt = password_hash($postjson['senha'], PASSWORD_DEFAULT);
     
     
-    $cliente = new Cliente($postjson['nome'], $postjson['cpf'], $postjson['telefone'], $postjson['cnpj'],$postjson['razaoSocial'], $postjson['idTipo'], $postjson['email'], $senhaCrypt);
+    $cliente = new Clientes($postjson['nome'], $postjson['cpf'], $postjson['telefone'], $postjson['cnpj'],$postjson['razaoSocial'], $postjson['idTipo'], $postjson['email'], $senhaCrypt);
 
     $id = $cliente->insert();
 
@@ -59,10 +59,10 @@ if($postjson['requisicao'] == 'add'){
 
     else if($postjson['requisicao']=='listar'){
 
-        $cliente = new Cliente();
+        $cliente = new Clientes();
 
         if($postjson['nome'] == ''){
-            $res = Cliente::getList();
+            $res = Clientes::getList();
         } else{
             $res = $cliente->search($postjson['nome']);
         }
@@ -112,7 +112,7 @@ if($postjson['requisicao'] == 'add'){
     else if($postjson['requisicao'] == 'excluir'){
 
 
-        $cliente = new Cliente();
+        $cliente = new Clientes();
         $cliente->setId($postjson['id_cliente']);
 
         $res = $cliente->delete();
@@ -128,7 +128,7 @@ if($postjson['requisicao'] == 'add'){
     //final do excluir
 
     else if($postjson['requisicao'] == 'login'){
-        $cliente = new Cliente();
+        $cliente = new Clientes();
 
         $cliente->efetuarLogin($postjson['email'], $postjson['senha']);
 
