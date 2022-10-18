@@ -25,7 +25,8 @@ class Sql extends PDO{
         
 
         $cmd = $this->querySql($comandoSql, $params);
-        
+
+        //printa a query que será executada no banco de dados (MUITO ÚTIL)
         // $cmd->debugDumpParams();
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
 

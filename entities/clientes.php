@@ -103,7 +103,7 @@ class Clientes{
         $this->setTelefone($data['telefone_cliente']);
         $this->setCnpj($data['cnpj_cliente']);
         $this->setRazaoSocial($data['razao_social_cliente']);
-        $this->setIdTipo($data['id_tipo_cliente_cliente']);
+        $this->setIdTipo($data['id_tipo_cliente']);
         $this->setEmail($data['email_cliente']);
         $this->setSenha($data['senha_cliente']);
     }
@@ -175,7 +175,6 @@ class Clientes{
 
         return $sql->select("SELECT * FROM tbcliente ORDER BY nome_cliente");
     }
-
     
     public static function search($_nome){
         $sql = new Sql();
@@ -187,15 +186,19 @@ class Clientes{
     public function efetuarLogin($_user, $_senha){
         $sql = new Sql();
 
-        $senhaCrypt = password_hash($_senha, PASSWORD_DEFAULT);
 
-        $res = $sql->select("SELECT * FROM tbcliente WHERE email_cliente = :EMAIL AND senha_cliente = :SENHA", array(
+        $res = $sql->select("SELECT * FROM tbcliente WHERE email_cliente = :EMAIL ", array(
             ":EMAIL" => $_user,
-            ":SENHA" => $senhaCrypt
         ));
 
         if(count($res) > 0){
-            $this->setData($res[0]);
+            if(password_verify($_senha, $res[0]['senha_cliente'])){
+                $this->setData($res[0]);
+            }else{
+                return 'dados incorretos';
+            }
+        }else{
+            return 'dados incorretos';
         }
 
     }
