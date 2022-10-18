@@ -118,4 +118,14 @@ else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
     }
 
     echo ($result);
+} else if($postjson['requisicao'] == "alterarStatus"){
+    //controlador responsável por alterar o status do descarte
+    $res = Descarte::updateStatus($postjson['id_descarte'], $postjson['status']);
+
+    if($res){
+        $result = json_encode(array('success'=>true, 'msg'=>"Status alterado com sucesso!"));
+    }else{
+        $result = json_encode(array('success'=>false, 'msg'=>"Falha ao alterar o status!"));
+    }
+
 }

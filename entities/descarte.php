@@ -83,6 +83,7 @@ class Descarte{
         $this->nome_hard = $_nome_hard;
         $this->id_cliente = $_id_cliente;
         $this->data_abertura = $_data_abertura;
+        $this->data_retirada = 'null';
         $this->prazo = $_prazo;
         $this->foto = $_foto;
         $this->status = $_status;
@@ -168,5 +169,21 @@ class Descarte{
         ));
     }
 
+    //função responsável por atualizar o status do descarte, método estático
+    public static function updateStatus($_id, $_newStatus) : bool{
+        $sql = new Sql();
+
+         $res = $sql->querySql("UPDATE FROM tbdescarte SET status_descarte = ".$_newStatus." WHERE id_descarte = :ID", array(
+            ":ID"=>$_id,
+        ));
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    
 
 }
