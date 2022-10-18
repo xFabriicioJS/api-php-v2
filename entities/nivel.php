@@ -88,6 +88,23 @@
 
     }
 
+    public static function updateNomeById($_id, $_nome) : bool{
+        $sql = new Sql();
+
+        $res = $sql->querySql("UPDATE tbnivel SET nome_nivel = :NOME WHERE id_nivel = :ID", array(
+            ":NOME"=>$_nome,
+            ":ID"=>$_id
+        ));
+
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
 
 
 

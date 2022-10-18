@@ -62,6 +62,19 @@ if($postjson['requisicao'] == 'add'){
         echo $result;
 
     }//final do excluir
+    else if($postjson['requisicao'] == 'editar'){
+        $res = Nivel::updateNomeById($postjson['id_nivel'], $postjson['nome_nivel']);
+    
+        if($res){
+            $result = json_encode(array('success' => true, 'msg'=>"Nivel editado com sucesso!"));
+
+        }else{
+            $result = json_encode(array('success' => false, 'msg'=>"Não foi possível editar o nivel"));
+        }
+
+        echo $result;
+
+    }
 
 
  

@@ -13,6 +13,9 @@ ADICIONAR USUÁRIO <--OK
     "foto_usuario": "teste.png"
 }
 
+
+
+http://localhost/api-php-v2/controller-usuarios.php
 LISTAR TODOS os USUÁRIOS <-- OK
 {
     "requisicao": "listar",
@@ -30,11 +33,21 @@ LISTAR TODOS os USUÁRIOS BUSCANDO POR NOME <-- OK
 
 REQUISIÇÕES NIVEIS
 
-ADICIONAR NIVEL
+ADICIONAR NIVEL <------- OK
 {
     "requisicao": "add",
     "nome": "TesteNivel"
 }
+
+
+EDITAR NIVEIS <------ OK
+
+{
+  "requisicao": "editar",
+  "id_nivel": 1,
+  "nome_nivel": "TesteSegundoNivel"
+}
+
 
 
 LISTAR TODOS os NIVEIS <-- OK
@@ -49,6 +62,19 @@ EXCLUIR NIVEL
     "requisicao":"excluir",
     "id_nivel": 5
 }
+
+
+REQUISIÇÕES DESCARTES
+
+ATUALIZAR DESCARTE <---- OK
+
+{
+  "requisicao": "alterarStatus",
+  "id_descarte": 2,
+  "status": "testeStatus"
+}
+
+
 
 
 REQUISIÇÕES CHAMADOS
@@ -75,30 +101,6 @@ LISTAR TODOS os CHAMADOS <--- OK
   "titulo": ""
 }
 
-
-ADD DESCARTE <---- OK
-{
-  "requisicao": "add",
-  "descricao": "testeDescricao",
-  "nome_hard": "testeNome",
-  "id_cliente": 1,
-  "data_abertura": "2022-10-10 08:00:00",
-  "prazo": "2022-10-10",
-  "foto": "teste.png",
-  "status": "TesteStatus"
-}
-
-LISTAR TODOS os DESCARTES <--- OK
-{
-  "requisicao": "listar"
-}
-
-LISTAR TODOS os DESCARTES por CLIENTE (ID)
-
-{
-  "requisicao": "listarTodosPorCliente",
-  "id_cliente": 1
-}
 
 
 
