@@ -66,13 +66,15 @@ EXCLUIR NIVEL
 
 REQUISIÇÕES DESCARTES
 
-ATUALIZAR DESCARTE <---- OK
+ATUALIZAR DESCARTE COM STATUS E DATA DE RETIRADA <---- OK
 
 {
-  "requisicao": "alterarStatus",
+  "requisicao": "alterar",
   "id_descarte": 2,
-  "status": "testeStatus"
+  "status": "testeStatus3",
+  "data_retirada": "2020-12-12 08:00:00"
 }
+
 
 
 

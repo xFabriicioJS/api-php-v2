@@ -78,7 +78,7 @@ class Descarte{
 
     // método construtor
 
-    public function __construct($_descricao, $_nome_hard, $_id_cliente, $_data_abertura,$_prazo, $_foto, $_status){
+    public function __construct($_descricao="", $_nome_hard="", $_id_cliente="", $_data_abertura="",$_prazo="", $_foto="", $_status=""){
         $this->descricao = $_descricao;
         $this->nome_hard = $_nome_hard;
         $this->id_cliente = $_id_cliente;
@@ -128,16 +128,7 @@ class Descarte{
     }
 
 
-    //função responsável por atualizar a data de retirada do descarte
-    public function updateDataRetirada($_data_retirada){
-        $sql = new Sql();
 
-        $sql->query("UPDATE tb_descarte SET data_retirada_descarte = :DATA WHERE id_descarte = :ID", array(
-            ":DATA"=>$_data_retirada,
-            ":ID"=>$this->getIdDescarte()
-        ));
-
-    }
 
     //função responsável por listar os descartes de TODOS os clientes
 
@@ -169,14 +160,17 @@ class Descarte{
         ));
     }
 
-    //função responsável por atualizar o status do descarte, método estático
-    public static function updateStatusById($_id, $_status) : bool{
+    //função responsável por atualizar o status do descarte
+    public function update() : bool{
         $sql = new Sql();
 
-        $res = $sql->querySql("UPDATE tbdescarte SET status_descarte = :STATUSDESCARTE WHERE id_descarte = :ID", array(
-            ":STATUSDESCARTE"=>$_status,
-            ":ID"=>$_id
+        
+        $res = $sql->querySql("UPDATE tbdescarte SET status_descarte = :STATUSDESCARTE, data_retirada_descarte = :DATARETIRADA WHERE id_descarte = :ID", array(
+            ":STATUSDESCARTE"=>$this->getStatus(),
+            ":ID"=>$this->getIdDescarte(),
+            ":DATARETIRADA"=>$this->getDataRetirada()
         ));
+        
         
         if($res){
             return true;
