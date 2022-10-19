@@ -130,7 +130,18 @@ else if ($postjson['requisicao'] == 'listar') {
 //final do excluir
 else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
 
-    $res = Chamado::getAllChamadosByCliente($postjson['id_cliente']);
+   
+    $chamado = new Chamado();
+
+    if ($postjson['titulo'] == '' && $postjson['protocolo'] == '' && $postjson['descricao'] == '' ) {
+        $res = Chamado::getAllChamadosByCliente($postjson['id_cliente']);
+    } else if($postjson['protocolo'] != ''){
+        $res = Chamado::searchCliente('protocolo_chamado', $postjson['protocolo'], $postjson['id_cliente']);
+    } else if($postjson['descricao'] != ''){
+        $res = Chamado::searchCliente('descri_chamado', $postjson['descricao'], $postjson['id_cliente']);
+    } else if($postjson['titulo'] != ''){
+        $res = Chamado::searchCliente('titulo_chamado', $postjson['titulo'], $postjson['id_cliente']);
+    }
 
     for ($i = 0; $i < count($res); $i++) {
 

@@ -242,6 +242,21 @@ public static function search($_tipoPesquisa, $_termo){
     
 
 }
+public static function searchCliente($_tipoPesquisa, $_termo, $_idCliente){
+    $sql = new Sql();
+
+    // echo "SELECT * FROM tbchamados WHERE ".$_tipoPesquisa." LIKE %".$_termo."% ORDER BY titulo_chamado";
+
+     return $sql->select("SELECT * FROM tbchamados WHERE $_tipoPesquisa LIKE :TERMO AND id_cliente_chamado = :ID", array(
+        ":ID"=>$_idCliente,
+        ":TERMO"=>"%".$_termo."%"
+    ));
+
+
+
+    
+
+}
 
 }
 
