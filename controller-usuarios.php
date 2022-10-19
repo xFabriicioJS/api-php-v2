@@ -105,30 +105,31 @@ if($postjson['requisicao'] == 'add'){
     }
     //final do excluir
 
-    // else if($postjson['requisicao'] == 'login'){
-    //     $query = $pdo->query("SELECT * from usuarios where usuario = '$postjson[usuario]' and senha = md5('$postjson[senha]') and ativo =1 ");
+    else if($postjson['requisicao'] == 'login'){
+        $usuario = new Usuario();
 
-    //     $res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    //     for($i = 0; $i < count($res); $i++) {
+        $usuario->efetuarLogin($postjson['email'], $postjson['senha']);
     
-    //         $dados[][] = array(
-    //             'id'=>$res[$i]['id'],
-    //             'nome'=>$res[$i]['nome'],
-    //             'usuario'=>$res[$i]['usuario'],
-    //             'nivel' =>$res[$i]['nivel'],
-    //             'ativo' => $res[$i]['ativo']
-    //         );
-    //     }
     
-    //     if(count($res) > 0){
-    //         $result = json_encode(array('success' => true, 'result' => $dados));
-    //     }else{
-    //         $result = json_encode(array('success' => false, 'msg'=>"Falha a efetuar o login" )); 
-    //     }
-    //     echo $result;
+        $dados = array(
+            'id_usuario' => $usuario->getId(),
+            'nome_usuario' => $usuario->getNome(),
+            'email_usuario' => $usuario->getEmail(),
+            'id_nivel_usuario' => $usuario->getNivel(),
+            'login_usuario' => $usuario->getLogin(),
+            'foto_usuario' => $usuario->getFotoUsuario(),
+            'tipo_usuario_sistema' => 'Usuario'
+        );
+    
+        if ($dados['id_usuario'] > 0) {
+            $result = json_encode(array('success' => true, 'result' => $dados));
+        } else {
+            $result = json_encode(array('success' => false, 'msg' => "Dados incorretos, tente novamente por favor."));
+        }
+    
+        echo $result;
 
-    // }
+    }
 
     
 

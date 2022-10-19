@@ -112,21 +112,21 @@ else if ($postjson['requisicao'] == 'listar') {
 //     echo $result;
 // }
 
-else if ($postjson['requisicao'] == 'excluir') {
+// else if ($postjson['requisicao'] == 'excluir') {
 
 
-    $chamado = new Cliente();
-    $chamado->setId($postjson['id_chamado']);
+//     $chamado = new Cliente();
+//     $chamado->setId($postjson['id_chamado']);
 
-    $res = $cliente->delete();
+//     $res = $cliente->delete();
 
-    if ($res) {
-        $result = json_encode(array('success' => true, 'msg' => "Exclusão feita com sucesso"));
-    } else {
-        $result = json_encode(array('success' => false, 'msg' => "Dados incorretos"));
-    }
-    echo $result;
-}
+//     if ($res) {
+//         $result = json_encode(array('success' => true, 'msg' => "Exclusão feita com sucesso"));
+//     } else {
+//         $result = json_encode(array('success' => false, 'msg' => "Dados incorretos"));
+//     }
+//     echo $result;
+// }
 //final do excluir
 else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
 

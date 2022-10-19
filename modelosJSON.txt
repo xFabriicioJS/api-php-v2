@@ -13,6 +13,13 @@ ADICIONAR USUÁRIO <--OK
     "foto_usuario": "teste.png"
 }
 
+LOGIN do USUARIO <-- OK 
+{
+  "requisicao": "login",
+  "email": "fabriciocostamonteiro@hotmail.co",
+  "senha": "123456"
+}
+
 
 
 http://localhost/api-php-v2/controller-usuarios.php

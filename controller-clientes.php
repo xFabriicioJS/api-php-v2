@@ -139,7 +139,8 @@ else if ($postjson['requisicao'] == 'login') {
         'cnpj_cliente' => $cliente->getCnpj(),
         'razaoSocial_cliente' => $cliente->getRazaoSocial(),
         'id_tipo_cliente' => $cliente->getIdTipo(),
-        'email_cliente' => $cliente->getEmail()
+        'email_cliente' => $cliente->getEmail(),
+        'tipo_usuario_sistema' => 'Cliente'
     );
 
     if ($dados['id_cliente'] > 0) {

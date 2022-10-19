@@ -80,12 +80,12 @@
 
     //Função para setar Dados
     public function setData($data){
-        $this->setId($data['id']);
-        $this->setNome($data['nome']);
-        $this->setEmail($data['email']);
-        $this->setNivel($data['nivel']);
-        $this->setLogin($data['login']);
-        $this->setSenha($data['senha']);
+        $this->setId($data['id_usuario']);
+        $this->setNome($data['nome_usuario']);
+        $this->setEmail($data['email_usuario']);
+        $this->setNivel($data['id_nivel_usuario']);
+        $this->setLogin($data['login_usuario']);
+        $this->setSenha($data['senha_usuario']);
         $this->setFotoUsuario($data['foto_usuario']);
     }
 
@@ -111,6 +111,24 @@
     
         //retornará o id para o controller
         return $this->getId();
+    }
+
+    //Função para efetuar o login do usuário administrativo
+    public function efetuarLogin($_email, $_senha){
+        $sql = new Sql();
+
+        $result = $sql->select("SELECT * FROM tbusuarios WHERE email_usuario = :EMAIL", array(
+            ":EMAIL"=>$_email
+        ));
+        if(count($result) > 0){
+            if(password_verify($_senha, $result[0]['senha_usuario'])){
+                $this->setData($result[0]);                
+            }else{
+                return 'dados incorretos';
+            }
+        }else{
+            return 'dados incorretos';
+        }
     }
 
     //Função para atualizar os dados
