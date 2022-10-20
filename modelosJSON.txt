@@ -125,6 +125,24 @@ CLIENTES - ADICIONAR CLIENTE <---- OK
 }
 
 
+ENDEREÇOS  ADD <-- OK
+{
+  "requisicao": "add",
+  "id_cliente_endereco": 1,
+  "cep": "088943",
+  "logradouro_endereco": "Rua Valter",
+  "num_endereco": "90",
+  "complemento_endereco": "Avenida",
+  "bairro_endereco": "Romanopolis",
+  "cidade_endereco": "São Paulo",
+  "estado_endereco": "SP"
+}
+
+LISTAR ENDEREÇOS POR CLIENTE <-- OK 
+{
+  "requisicao": "listarPorCliente",
+  "id_cliente_endereco": 1
+}
 
 
 
