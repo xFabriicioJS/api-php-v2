@@ -134,9 +134,9 @@ public function setData($data){
     $this->setDescricao($data['descricao']);
     $this->setTitulo($data['titulo']);
     $this->setIdCliente($data['idCliente']);
-    $this->setDataAbertura(new DateTime($data['dataAbertura']));
-    $this->setDataFinalizacao(new DateTime($data['dataFinalizacao']));
-    $this->setDataLimite(new DateTime($data['dataLimite']));
+    $this->setDataAbertura($data['dataAbertura']);
+    $this->setDataFinalizacao($data['dataFinalizacao']);
+    $this->setDataLimite($data['dataLimite']);
     $this->setFotoErro($data['foto_erro']);
     $this->setStatus($data['status']);
     $this->setPrioridade($data['prioridade']);

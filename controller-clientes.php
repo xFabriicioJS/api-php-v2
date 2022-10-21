@@ -14,14 +14,6 @@ $postjson = json_decode(file_get_contents('php://input', true), true);
 
 if ($postjson['requisicao'] == 'add') {
 
-    //lógica para pegar pegar a imagem na requisição
-    // if($postjson['avatar'] !== ''){
-    //     $avatar_name = $_FILES["avatar"]["name"];
-    //     $avatar_tmp_name = $_FILES["avatar"]["tmp_name"];
-
-    //     $pasta_img = "./images/". $avatar_name;
-    //     move_uploaded_file($avatar_tmp_name, $pasta_img);    
-    //     }
 
 
     //Pegando a senha do cliente e criptografando-a
@@ -44,15 +36,7 @@ if ($postjson['requisicao'] == 'add') {
 }
 
 
-// else if($postjson['requisicao'] == 'addImagem'){
-//     if($_FILES['avatar']){
-//         $avatar_name = $_FILES["avatar"]["name"];
-//         $avatar_tmp_name = $_FILES["avatar"]["tmp_name"];
 
-//         $pasta_img = "./images/". $avatar_name;
-//         move_uploaded_file($avatar_tmp_name, $pasta_img);    
-//         }
-// }
 
 
 // Final requisição add
