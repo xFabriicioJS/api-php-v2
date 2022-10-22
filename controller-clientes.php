@@ -41,6 +41,23 @@ if ($postjson['requisicao'] == 'add') {
 
 // Final requisição add
 
+//Requisição excluisiva para troca de senha
+else if($postjson['requisicao'] == 'alterarSenha'){
+    $senhaCrypt = password_hash($postjson['senhaNova'], PASSWORD_DEFAULT);
+
+    $cliente = new Clientes();
+    $res = $cliente->updateSenha($postjson['senhaAntiga'], $postjson['id_cliente'], $senhaCrypt);
+
+    if($res == 'dados corretos'){
+        $result = json_encode(array('success' => true, 'msg' => "Senha alterada com sucesso!"));
+    }else{
+        $result = json_encode(array('success' => false, 'msg' => "Ocorreu uma falha ao alterar a senha!"));
+    }
+
+    echo $result;
+
+}
+
 else if ($postjson['requisicao'] == 'listar') {
 
     $cliente = new Clientes();
@@ -75,22 +92,31 @@ else if ($postjson['requisicao'] == 'listar') {
     echo ($result);
 }
 
-// else if($postjson['requisicao']=='editar'){
-//     $query = $pdo->prepare("UPDATE usuarios SET nome=:nome, usuario=:usuario, senha= :senha, senha_original = :senha_original, nivel=:nivel WHERE id = :id");
-//     $query->bindValue(":nome",$postjson['nome']);
-//     $query->bindValue(":usuario",$postjson['usuario']);
-//     $query->bindValue(":senha",$postjson['senha']);
-//     $query->bindValue(":senha_original",$postjson['senha']);
-//     $query->bindValue(":nivel",$postjson['nivel']);
-//     $query->bindValue(":id",$postjson['id']);
-//     $query->execute();
-//     if ($query){
-//         $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-//     }else{
-//         $result = json_encode(array('success'=>false,'msg'=>"Dados incorretos! Falha ao atualizar o usuário! (WRH014587)"));
-//     }
-//     echo $result;
-// }
+else if($postjson['requisicao'] == 'editar'){
+        
+    $cliente = new Clientes();
+    $cliente->setId($postjson['id']);
+    $cliente->setNome($postjson['nome']);
+    $cliente->setCpf($postjson['cpf']);
+    $cliente->setTelefone($postjson['telefone']);
+    $cliente->setCnpj($postjson['cnpj']);
+    $cliente->setRazaoSocial($postjson['razaoSocial']);
+    $cliente->setIdTipo($postjson['idTipo']);
+    $cliente->setEmail($postjson['email']);
+
+
+
+    $res = $cliente->update();
+
+    if($res){
+        $result = json_encode(array('success' => true, 'msg'=>"Cliente editado com sucesso!"));
+
+    }else{
+        $result = json_encode(array('success' => false, 'msg'=>"Não foi possível editar o cliente"));
+    }
+
+    echo $result;
+}
 
 else if ($postjson['requisicao'] == 'excluir') {
 
@@ -108,9 +134,19 @@ else if ($postjson['requisicao'] == 'excluir') {
     echo $result;
 }
 //final do excluir
+else if($postjson['requisicao'] == 'recuperarSenha'){
+  
+
+    
+}
+
+
 
 else if ($postjson['requisicao'] == 'login') {
     $cliente = new Clientes();
+
+  
+  
 
     $cliente->efetuarLogin($postjson['email'], $postjson['senha']);
 
@@ -135,4 +171,18 @@ else if ($postjson['requisicao'] == 'login') {
     }
 
     echo $result;
+}
+
+else if($postjson['requisicao'] == 'atualizaTelefone'){
+
+    $res = Clientes::atualizaTelefone($postjson['id_cliente'], $postjson['telefone_cliente']);
+
+    if($res){
+        $result = json_encode(array('success' => true, 'msg'=>"Telefone atualizado com sucesso!"));
+    }else{
+        $result = json_encode(array('success' => false, 'msg'=>"Não foi possível atualizar o telefone"));
+    }
+    print $result;
+
+
 }

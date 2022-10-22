@@ -19,6 +19,9 @@ class Sql extends PDO{
        $cmd = $this->cn->prepare($comandoSql);
        $this->setParams($cmd, $params);
        $cmd->execute();
+
+       //mostra o comando SQL que será executado, muito útil por sinal melhor coisa ja feita nesse php
+    //    $cmd->debugDumpParams();
        return $cmd;
     }
     public function select($comandoSql, $params = array()){

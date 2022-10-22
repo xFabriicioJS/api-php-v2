@@ -130,16 +130,48 @@ class Clientes{
         //retornará o id para o controller
         return $this->getId();
     }
+    //Função para alterar a senha do cliente
+    public function updateSenha($_senhaAntiga, $_id_cliente, $_senhaNova){
 
-    //Função para atualizar os dados
+        //Precisamos primeiro verificar a senha mandada pelo cliente, e se estiver certa, alterar a senha para a nova senha enviada
+
+        $sql = new Sql();
+
+        //verificando a senha antiga enviada
+        $res = $sql->select("SELECT * FROM tbcliente WHERE id_cliente = :ID ", array(
+            ":ID" => $_id_cliente,
+        ));
+
+        if(count($res) > 0){
+
+    
+
+
+            if(password_verify($_senhaAntiga, $res[0]['senha_cliente'])){   
+                //Senha antiga está correta, vamos alterar a senha para a nova senha enviada
+                $sql->querySql("UPDATE tbcliente SET senha_cliente = :SENHA WHERE id_cliente = :ID", array(
+                    ":SENHA" => $_senhaNova,
+                    ":ID" => $_id_cliente
+                ));
+                return 'dados corretos';
+                
+            }else{
+                return 'dados incorretos';
+            }
+        }else{
+            return 'dados incorretos';
+        }
+    }
+
+    //Função para atualizar os dados SEM A SENHA, pois terá seu próprio método
     public function update() : bool{
         $sql = new Sql();
 
         // Pegando a senha que vier no json e codificando-a
-        $senhaCrypt = password_hash($this->getSenha(), PASSWORD_DEFAULT);
+        // $senhaCrypt = password_hash($this->getSenha(), PASSWORD_DEFAULT);
 
-        $res = $sql->query("UPDATE tbcliente SET nome_cliente = :NOME, cpf_cliente = :CPF, telefone_cliente = :TELEFONE, cnpj_cliente = :CNPJ, razao_social = :RAZAOSOCIAL, id_tipo_cliente = :IDTIPO, email_cliente = :EMAIL, senha_cliente = :SENHA WHERE id = :ID", array(
-            ":NOME" => $this->getNome(),
+        $res = $sql->querySql("UPDATE tbcliente SET nome_cliente = :NOME, cpf_cliente = :CPF, telefone_cliente = :TELEFONE, cnpj_cliente = :CNPJ, razao_social_cliente = :RAZAOSOCIAL, id_tipo_cliente = :IDTIPO, email_cliente = :EMAIL WHERE id_cliente = :ID", array(
+            ":NOME" => $this->getNome(),    
             ":ID" => $this->getId(),
             ":CPF" => $this->getCpf(),
             ":TELEFONE" => $this->getTelefone(),
@@ -147,7 +179,6 @@ class Clientes{
             ":RAZAOSOCIAL" => $this->getRazaoSocial(),
             ":IDTIPO" => $this->getIdTipo(),
             ":EMAIL" => $this->getEmail(),
-            ":SENHA" => $senhaCrypt
         ));
 
         //Retornará um booleano para o controller
@@ -203,6 +234,17 @@ class Clientes{
 
     }
 
+        public static function atualizaTelefone($_id_cliente, $_telefone) : bool{
+            $sql = new Sql();
 
+            $sql->querySql("UPDATE tbcliente SET telefone_cliente = :TELEFONE WHERE id_cliente = :ID", array(
+                ":TELEFONE" => $_telefone,
+                ":ID" => $_id_cliente
+            ));
 
+            if($sql){
+                return true;
+            }
+            return false;
+        }
 }
