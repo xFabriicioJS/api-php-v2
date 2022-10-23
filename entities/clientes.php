@@ -113,6 +113,7 @@ class Clientes{
     public function insert(){
         $sql = new Sql();
 
+
         //criando a procedure
         $res = $sql->select("CALL sp_cliente_insert(:nome, :cpf, :telefone, :cnpj, :razaoSocial, :id_tipo, :email_cliente, :senha_cliente )", array(
             ":nome" => $this->getNome(),
@@ -250,11 +251,18 @@ class Clientes{
                
                 //Se a senha estiver correta, vamos atualizar o email
 
-                $sql->querySql("UPDATE tbcliente SET email_cliente = :EMAIL WHERE id_cliente = :ID", array(
-                    ":EMAIL" => $_emailNovo,
-                    ":ID" => $_id_cliente
-                ));
+               $procedure = $sql->select("CALL sp_cliente_update_Email(:EMAILNOVO, :IDCLIENTE)
+               ", array(
+                ":EMAILNOVO" => $_emailNovo,
+                ":IDCLIENTE" => $_id_cliente
+               ));
+
+               if(count($procedure) > 0){
                 return 'dados corretos';
+               }else{
+                return 'Esse email já pertence a outro usuário';
+               }
+                
             }else{
                 return 'dados incorretos';
             }

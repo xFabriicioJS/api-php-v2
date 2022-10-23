@@ -183,8 +183,12 @@ else if($postjson['requisicao'] == 'atualizaEmail'){
     if($res == 'dados corretos'){
         $result = json_encode(array('success' => true, 'msg' => "Email alterado com sucesso!"));
     }
-    else{
+    else if($res == 'dados incorretos'){
         $result = json_encode(array('success' => false, 'msg' => "Ocorreu uma falha ao alterar o email!"));
+    }else if($res == 'Esse email já pertence a outro usuário'){
+        $result = json_encode(array('success' => false, 'msg' => "Esse email já pertence a outro usuário"));
+    }else{
+        $result = json_encode(array('success' => false, 'msg' => "Ocorreu um erro!"));
     }
 
     echo $result;
