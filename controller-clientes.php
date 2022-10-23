@@ -173,6 +173,23 @@ else if ($postjson['requisicao'] == 'login') {
     echo $result;
 }
 
+else if($postjson['requisicao'] == 'atualizaEmail'){
+
+
+    
+
+    $res = Clientes::atualizaEmail($postjson['id_cliente'],$postjson['email_novo'], $postjson['senha_atual']);
+
+    if($res == 'dados corretos'){
+        $result = json_encode(array('success' => true, 'msg' => "Email alterado com sucesso!"));
+    }
+    else{
+        $result = json_encode(array('success' => false, 'msg' => "Ocorreu uma falha ao alterar o email!"));
+    }
+
+    echo $result;
+}
+
 else if($postjson['requisicao'] == 'atualizaTelefone'){
 
     $res = Clientes::atualizaTelefone($postjson['id_cliente'], $postjson['telefone_cliente']);

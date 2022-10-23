@@ -234,6 +234,36 @@ class Clientes{
 
     }
 
+    //Precisamos passar a senha já criptografada lá no controller, então aqui já vamos receber a senha criptografada
+    public static function atualizaEmail($_id_cliente, $_emailNovo, $_senhaAtual){
+        $sql = new Sql();
+
+        $res = $sql->select("SELECT * FROM tbcliente WHERE id_cliente = :ID ", array(
+            ":ID" => $_id_cliente,
+        ));
+
+        if(count($res) > 0){
+
+
+            if(password_verify($_senhaAtual, $res[0]['senha_cliente'])){
+
+               
+                //Se a senha estiver correta, vamos atualizar o email
+
+                $sql->querySql("UPDATE tbcliente SET email_cliente = :EMAIL WHERE id_cliente = :ID", array(
+                    ":EMAIL" => $_emailNovo,
+                    ":ID" => $_id_cliente
+                ));
+                return 'dados corretos';
+            }else{
+                return 'dados incorretos';
+            }
+        }else{
+            return 'dados incorretos';
+        }
+    }
+
+
         public static function atualizaTelefone($_id_cliente, $_telefone) : bool{
             $sql = new Sql();
 

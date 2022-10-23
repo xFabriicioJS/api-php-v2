@@ -144,6 +144,12 @@ LISTAR ENDEREÇOS POR CLIENTE <-- OK
   "id_cliente_endereco": 1
 }
 
-
+ATUALIZAR EMAIL CLIENTE <--- OK 
+{
+    "requisicao": "atualizaEmail",
+    "senha_atual": "12345",
+    "email_novo": "teste@email",
+    "id_cliente": 18
+}
 
 
