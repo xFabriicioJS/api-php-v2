@@ -11,6 +11,7 @@ class Clientes{
         private $idTipo;
         private $email;
         private $senha;
+        private $foto;
     
 
     //métodos getter e setters
@@ -68,6 +69,13 @@ class Clientes{
     public function setSenha($senha){
         $this->senha = $senha;
     }
+    public function getFoto(){
+        return $this->foto;
+    }
+    public function setFoto($foto){
+        $this->foto = $foto;
+    }
+
 
     //método construtor
     public function __construct($nome="", $cpf="", $telefone="", $cnpj="", $razao_social="", $idTipo="", $email="", $senha=""){
@@ -106,10 +114,11 @@ class Clientes{
         $this->setIdTipo($data['id_tipo_cliente']);
         $this->setEmail($data['email_cliente']);
         $this->setSenha($data['senha_cliente']);
+        $this->setFoto($data['foto_cliente']);
     }
 
 
-    //Função para inserção de dados
+    //Função para inserção de dados, criaremos um cliente sem foto mesmo.
     public function insert(){
         $sql = new Sql();
 
@@ -284,5 +293,34 @@ class Clientes{
                 return true;
             }
             return false;
+        }
+
+        public static function atualizaFoto($_id_cliente, $_foto_cliente){
+            $sql = new Sql();
+
+            $res = $sql->select("CALL sp_cliente_update_foto(:FOTO, :ID)", array(
+                ":FOTO" => $_foto_cliente,
+                ":ID" => $_id_cliente
+            ));
+
+            if($res[0]['ROW_COUNT()'] > 0){
+                return 'foto atualizada';
+            }else{
+                return 'erro';
+            }
+
+        }
+
+        public static function recuperaPlanoByIdCliente($_id_cliente){
+            $sql = new Sql();
+
+            $res = $sql->select("SELECT * FROM tbplanos WHERE id_cliente_plano = :IDCLIENTE", array(
+                ":IDCLIENTE" => $_id_cliente
+            ));
+
+            if(count($res) > 0){
+                return $res;
+            }
+            return 'erro';
         }
 }

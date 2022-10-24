@@ -152,4 +152,17 @@ ATUALIZAR EMAIL CLIENTE <--- OK
     "id_cliente": 18
 }
 
+ATUALIZAR FOTO CLIENTE <-- OK
+{
+    "requisicao": "atualizaFoto",
+    "foto_cliente": "teste.teste",
+    "id_cliente": "8"
+}
+
+RECUPERAR PLANOS POR CLIENTE <-- OK
+{
+    "requisicao": "recuperarPlano",
+    "id_cliente": 1
+}
+
 

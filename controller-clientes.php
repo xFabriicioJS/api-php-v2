@@ -160,6 +160,7 @@ else if ($postjson['requisicao'] == 'login') {
         'razaoSocial_cliente' => $cliente->getRazaoSocial(),
         'id_tipo_cliente' => $cliente->getIdTipo(),
         'email_cliente' => $cliente->getEmail(),
+        'foto_cliente' => $cliente->getFoto(),
         'tipo_usuario_sistema' => 'Cliente'
     );
 
@@ -204,6 +205,18 @@ else if($postjson['requisicao'] == 'atualizaTelefone'){
         $result = json_encode(array('success' => false, 'msg'=>"Não foi possível atualizar o telefone"));
     }
     print $result;
+}
 
+else if($postjson['requisicao'] == 'atualizaFoto'){
+    
+    $res = Clientes::atualizaFoto($postjson['id_cliente'], $postjson['foto_cliente']);
+
+    if($res == 'foto atualizada'){
+        $result = json_encode(array('success' => true, 'msg'=>"Foto atualizada com sucesso!"));
+    }else{
+        $result = json_encode(array('success' => false, 'msg'=>"Não foi possível atualizar a foto"));
+    }
+
+    echo $result;
 
 }
