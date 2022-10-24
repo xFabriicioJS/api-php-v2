@@ -152,4 +152,10 @@ ATUALIZAR EMAIL CLIENTE <--- OK
     "id_cliente": 18
 }
 
+RECUPERAR PLANOS POR CLIENTE <-- OK
+{
+    "requisicao": "recuperarPlano",
+    "id_cliente": 1
+}
+
 

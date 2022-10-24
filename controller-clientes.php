@@ -203,7 +203,33 @@ else if($postjson['requisicao'] == 'atualizaTelefone'){
     }else{
         $result = json_encode(array('success' => false, 'msg'=>"Não foi possível atualizar o telefone"));
     }
-    print $result;
+    echo $result;
+}
+
+else if($postjson['requisicao'] == 'recuperarPlano'){
+
+    $res = Clientes::recuperaPlanoByIdCliente($postjson['id_cliente']);
 
 
+    if($res == 'erro'){
+        $result = json_encode(array('success' => false, 'msg'=>"Falha ao recuperar o plano"));
+        echo $result;
+
+        //Cortará a função para não executar o resto do código
+        return false;
+    }
+
+    if(count($res)){
+        for ($i = 0; $i < count($res); $i++) {
+
+            $dados[][] = array(
+                'id_plano' => $res[$i]['id_plano_planos'],
+                'nome_plano' => $res[$i]['nome_plano_planos'],
+                'valor_plano' => $res[$i]['valor_plano']
+            );
+        }
+        $result = json_encode(array('success' => true, 'result' => $dados));
+    }
+    
+    echo ($result);
 }

@@ -285,4 +285,18 @@ class Clientes{
             }
             return false;
         }
+
+        public static function recuperaPlanoByIdCliente($_id_cliente){
+            $sql = new Sql();
+
+            $res = $sql->select("SELECT * FROM tbplanos WHERE id_cliente_plano = :IDCLIENTE", array(
+                ":IDCLIENTE" => $_id_cliente
+            ));
+
+            if(count($res) > 0){
+                return $res;
+            }
+            return 'erro';
+        }
+
 }
