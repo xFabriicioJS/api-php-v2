@@ -108,7 +108,8 @@ else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
             'data_abertura' => $res[$i]['data_abertura_descarte'],
             'data_retirada' => $res[$i]['data_retirada_descarte'],
             'prazo' => $res[$i]['prazo_retirada_descarte'],
-            'foto_hardware' => $res[$i]['foto_hard_descarte']
+            'foto_hardware' => $res[$i]['foto_hard_descarte'],
+            'status'=> $res[$i]['status_descarte']
         );
     }
     if (count($res)) {
