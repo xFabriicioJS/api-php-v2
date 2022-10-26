@@ -94,8 +94,15 @@
     public function insert(){
         $sql = new Sql();
 
-       
+        //Vamos verificar primeiro se o usuário já existe
+        $verifyUserEmail = $sql->select("SELECT * FROM tbusuarios WHERE email_usuario = :EMAIL", array(
+            ":EMAIL"=>$this->getEmail()
+        ));
 
+        if(count($verifyUserEmail) > 0){
+            return 'usuario cadastrado';
+        }
+            
         //criando a procedure
         $res = $sql->select("CALL sp_user_insert(:nome, :email, :idnivel, :login, :senha, :foto_usuario)", array(
             ":nome" => $this->getNome(),

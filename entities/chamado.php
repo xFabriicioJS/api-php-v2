@@ -224,7 +224,7 @@ public function updateDataFinalizacao($_dataFinalizacao) : bool{
 public static function getList(){
     $sql = new Sql();
 
-    return $sql->select("SELECT * FROM tbchamados ORDER BY titulo_chamado");
+    return $sql->select("SELECT tbchamados.id_chamado, tbchamados.protocolo_chamado, tbchamados.descri_chamado, tbchamados.titulo_chamado, tbchamados.id_cliente_chamado, tbchamados.data_abertura_chamado, tbchamados.data_finalizacao_chamado, tbchamados.data_limite_chamado, tbchamados.foto_erro_chamado, tbchamados.status_chamado, tbchamados.prioridade_chamado, tbchamados.local_atend_chamado, tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.foto_cliente FROM tbchamados INNER JOIN tbcliente ON tbchamados.id_cliente_chamado = tbcliente.id_cliente ORDER BY tbchamados.titulo_chamado;");
 }
 
 //método responsável por listar os chamados de acordo com o tipo da pesquisa, e o termo pesquisado que virá como parâmetro
@@ -233,7 +233,7 @@ public static function search($_tipoPesquisa, $_termo){
 
     // echo "SELECT * FROM tbchamados WHERE ".$_tipoPesquisa." LIKE %".$_termo."% ORDER BY titulo_chamado";
 
-     return $sql->select("SELECT * FROM tbchamados WHERE $_tipoPesquisa LIKE :TERMO", array(
+     return $sql->select("SELECT tbchamados.id_chamado, tbchamados.protocolo_chamado, tbchamados.descri_chamado, tbchamados.titulo_chamado, tbchamados.id_cliente_chamado, tbchamados.data_abertura_chamado, tbchamados.data_finalizacao_chamado, tbchamados.data_limite_chamado, tbchamados.foto_erro_chamado, tbchamados.status_chamado, tbchamados.prioridade_chamado, tbchamados.local_atend_chamado, tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.foto_cliente FROM tbchamados INNER JOIN tbcliente ON tbchamados.id_cliente_chamado = tbcliente.id_cliente WHERE $_tipoPesquisa LIKE :TERMO", array(
         ":TERMO"=>"%".$_termo."%"
     ));
 
@@ -247,7 +247,7 @@ public static function searchCliente($_tipoPesquisa, $_termo, $_idCliente){
 
     // echo "SELECT * FROM tbchamados WHERE ".$_tipoPesquisa." LIKE %".$_termo."% ORDER BY titulo_chamado";
 
-     return $sql->select("SELECT * FROM tbchamados WHERE $_tipoPesquisa LIKE :TERMO AND id_cliente_chamado = :ID", array(
+     return $sql->select("SELECT tbchamados.id_chamado, tbchamados.protocolo_chamado, tbchamados.descri_chamado, tbchamados.titulo_chamado, tbchamados.id_cliente_chamado, tbchamados.data_abertura_chamado, tbchamados.data_finalizacao_chamado, tbchamados.data_limite_chamado, tbchamados.foto_erro_chamado, tbchamados.status_chamado, tbchamados.prioridade_chamado, tbchamados.local_atend_chamado, tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.foto_cliente FROM tbchamados INNER JOIN tbcliente ON tbchamados.id_cliente_chamado = tbcliente.id_cliente WHERE $_tipoPesquisa LIKE :TERMO AND id_cliente_chamado = :ID", array(
         ":ID"=>$_idCliente,
         ":TERMO"=>"%".$_termo."%"
     ));

@@ -20,16 +20,17 @@ if($postjson['requisicao'] == 'add'){
     $senhaCrypt = password_hash($postjson['senha'], PASSWORD_DEFAULT);
     
     
-    $user = new Usuario($postjson['nome_usuario'], $postjson['email_usuario'], $postjson['id_nivel_usuario'], $postjson['login_usuario'], $senhaCrypt,$postjson['foto_usuario']);
-
-
-    
+    $user = new Usuario($postjson['nome_usuario'], $postjson['email_usuario'], $postjson['id_nivel_usuario'], $postjson['login_usuario'], $senhaCrypt,$postjson['foto_usuario']);    
 
     $id = $user->insert();
 
-    if(isset($id)){
+    if($id > 0){
         $result = json_encode(array('success' => true, 'id' => $id));
-    }else{
+    }
+    else if($id == 'usuario cadastrado'){
+        $result = json_encode(array('success' => false, 'msg' => "Usuário já cadastrado!"));
+    }
+    else {
         $result = json_encode(array('success' => false, 'msg' => "Ocorreu uma falha ao inserir!"));
         echo $id;
     }
@@ -85,7 +86,7 @@ if($postjson['requisicao'] == 'add'){
     //         $result = json_encode(array('success'=>false,'msg'=>"Dados incorretos! Falha ao atualizar o usuário! (WRH014587)"));
     //     }
     //     echo $result;
-    // }
+    // }s
 
     else if($postjson['requisicao'] == 'excluir'){
 

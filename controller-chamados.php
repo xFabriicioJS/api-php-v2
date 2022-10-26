@@ -68,7 +68,9 @@ else if ($postjson['requisicao'] == 'listar') {
             'foto_erro' => $res[$i]['foto_erro_chamado'],
             'status' => $res[$i]['status_chamado'],
             'prioridade' => $res[$i]['prioridade_chamado'],
-            'local_atend' => $res[$i]['local_atend_chamado']
+            'local_atend' => $res[$i]['local_atend_chamado'],
+            'nome_cliente' => $res[$i]['nome_cliente'],
+            'foto_cliente' => $res[$i]['foto_cliente'],
         );
     }
     if (count($res)) {
