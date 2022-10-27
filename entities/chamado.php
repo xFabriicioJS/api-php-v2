@@ -107,7 +107,7 @@ public function __construct($descricao="", $titulo="", $idCliente="", $dataAbert
 public static function getAllChamadosByCliente($id){
     $sql = new Sql();
 
-    $results = $sql->select("SELECT * FROM tbchamados WHERE id_cliente_chamado = :ID", array(
+    $results = $sql->select("SELECT tbchamados.id_chamado, tbchamados.protocolo_chamado, tbchamados.descri_chamado, tbchamados.titulo_chamado, tbchamados.id_cliente_chamado, tbchamados.data_abertura_chamado, tbchamados.data_finalizacao_chamado, tbchamados.data_limite_chamado, tbchamados.foto_erro_chamado, tbchamados.status_chamado, tbchamados.prioridade_chamado, tbchamados.local_atend_chamado, tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.foto_cliente FROM tbchamados INNER JOIN tbcliente ON tbchamados.id_cliente_chamado = tbcliente.id_cliente WHERE id_cliente_chamado = :ID", array(
         ":ID"=>$id
     ));
 
@@ -119,7 +119,7 @@ public static function getAllChamadosByCliente($id){
 //Carregar por id
 public function loadById($id){
     $sql = new Sql();
-    $results = $sql->select("SELECT * FROM tbchamados WHERE id = :ID", array(
+    $results = $sql->select("SELECT tbchamados.id_chamado, tbchamados.protocolo_chamado, tbchamados.descri_chamado, tbchamados.titulo_chamado, tbchamados.id_cliente_chamado, tbchamados.data_abertura_chamado, tbchamados.data_finalizacao_chamado, tbchamados.data_limite_chamado, tbchamados.foto_erro_chamado, tbchamados.status_chamado, tbchamados.prioridade_chamado, tbchamados.local_atend_chamado, tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.foto_cliente FROM tbchamados INNER JOIN tbcliente ON tbchamados.id_cliente_chamado = tbcliente.id_cliente WHERE id_chamado = :ID", array(
         ":ID"=>$id
     ));
     if(count($results) > 0){
