@@ -81,6 +81,7 @@ else if ($postjson['requisicao'] == 'listar') {
             'id_tipo_cliente' => $res[$i]['id_tipo_cliente'],
             'email_cliente' => $res[$i]['email_cliente'],
             'senha_cliente' => $res[$i]['senha_cliente'],
+            'foto_cliente' => $res[$i]['foto_cliente'],
         );
     }
     if (count($res)) {
@@ -134,11 +135,7 @@ else if ($postjson['requisicao'] == 'excluir') {
     echo $result;
 }
 //final do excluir
-else if($postjson['requisicao'] == 'recuperarSenha'){
-  
 
-    
-}
 
 
 
