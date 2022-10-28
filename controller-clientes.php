@@ -135,7 +135,42 @@ else if ($postjson['requisicao'] == 'excluir') {
     echo $result;
 }
 //final do excluir
+else if($postjson['requisicao'] == 'findById'){
+    $cliente = new Clientes();
 
+    $res = $cliente->loadById($postjson['id_cliente']);
+
+    for ($i = 0; $i < count($res); $i++) {
+
+        $dados[][] = array(
+            'id_cliente' => $res[$i]['id_cliente'],
+            'nome_cliente' => $res[$i]['nome_cliente'],
+            'cpf_cliente' => $res[$i]['cpf_cliente'],
+            'telefone_cliente' => $res[$i]['telefone_cliente'],
+            'cnpj_cliente' => $res[$i]['cnpj_cliente'],
+            'razaoSocial_cliente' => $res[$i]['razao_social_cliente'],
+            'id_tipo_cliente' => $res[$i]['id_tipo_cliente'],
+            'email_cliente' => $res[$i]['email_cliente'],
+            'senha_cliente' => $res[$i]['senha_cliente'],
+            'foto_cliente' => $res[$i]['foto_cliente'],
+            'num_endereco' => $res[$i]['num_endereco'],
+            'cep_enderceo' => $res[$i]['cep_endereco'],
+            'complemento_endereco' => $res[$i]['complemento_endereco'],
+            'logradouro_endereco' => $res[$i]['logradouro_endereco'],
+            'cidade_endereco' => $res[$i]['cidade_endereco'],
+        );
+
+        if(count($res)){
+            $result = json_encode(array('success' => true, 'result' => $dados));
+        }else{
+            $result = json_encode(array('success' => false, 'result' => '0'));
+        }
+
+        echo $result;
+    }
+    
+
+}
 
 
 

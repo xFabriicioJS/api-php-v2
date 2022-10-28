@@ -95,11 +95,14 @@ class Clientes{
     public function loadById($id){
         $sql = new Sql();
 
-        $result = $sql->select("SELECT * FROM tbcliente WHERE id = :ID", array(
+        //Precisaremos fazer uma INNER JOIN para trazer os dados do endereço do cliente
+
+
+        $result = $sql->select("SELECT tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.cpf_cliente, tbcliente.telefone_cliente, tbcliente.cnpj_cliente, tbcliente.razao_social_cliente, tbcliente.id_tipo_cliente, tbcliente.email_cliente, tbcliente.senha_cliente, tbcliente.foto_cliente, tbendereco.num_endereco, tbendereco.cep_endereco, tbendereco.complemento_endereco, tbendereco.logradouro_endereco, tbendereco.cidade_endereco from tbcliente INNER JOIN tbendereco ON tbcliente.id_cliente = tbendereco.id_cliente_endereco WHERE tbcliente.id_cliente = :ID", array(
             ":ID"=>$id
         ));
         if(count($result) > 0){
-            $this->setData($result[0]);
+            return $result;
         }
     }
 
