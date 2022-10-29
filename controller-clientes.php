@@ -154,7 +154,7 @@ else if($postjson['requisicao'] == 'findById'){
             'senha_cliente' => $res[$i]['senha_cliente'],
             'foto_cliente' => $res[$i]['foto_cliente'],
             'num_endereco' => $res[$i]['num_endereco'],
-            'cep_enderceo' => $res[$i]['cep_endereco'],
+            'cep_endereco' => $res[$i]['cep_endereco'],
             'complemento_endereco' => $res[$i]['complemento_endereco'],
             'logradouro_endereco' => $res[$i]['logradouro_endereco'],
             'cidade_endereco' => $res[$i]['cidade_endereco'],
