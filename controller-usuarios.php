@@ -85,12 +85,16 @@ if($postjson['requisicao'] == 'add'){
     }
 
     else if($postjson['requisicao'] == 'atualizaEmail'){
-        $user = new Usuario();
-        $user->loadById($postjson['id_usuario']);
-        $user->setEmail($postjson['email_usuario']);
-        $user->update();
-        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-        echo $result;
+        
+        $res = Usuario::atualizaEmail($postjson['id_usuario'], $postjson['email_usuario']);
+
+        if($res == 'Email cadastrado com sucesso'){
+            $result = json_encode(array('success' => true, 'msg'=>"Email cadastrado com sucesso!"));
+        }else{
+            $result = json_encode(array('success' => false, 'msg'=>"Esse email já está cadastrado!"));
+        }
+
+        print $result;
     }
 
     else if($postjson['requisicao'] == 'atualizaNivel'){

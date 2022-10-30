@@ -269,7 +269,7 @@ class Clientes{
                 ":IDCLIENTE" => $_id_cliente
                ));
 
-               if(count($procedure) > 0){
+               if($res[0]['ROW_COUNT()'] > 0){
                 return 'dados corretos';
                }else{
                 return 'Esse email já pertence a outro usuário';

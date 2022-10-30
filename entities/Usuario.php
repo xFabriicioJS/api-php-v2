@@ -190,6 +190,24 @@
         return false;
     }
 
+    //Função para atualizar o email do usuário já vericando se o email já existe
+    public static function atualizaEmail($_id_usuario, $_novoEmail){
+        $sql = new Sql();
+
+        $procedure = $sql->select("CALL sp_usuario_update_Email(:EMAILNOVO, :IDUSUARIO)
+               ", array(
+                ":EMAILNOVO" => $_novoEmail,
+                ":IDUSUARIO" => $_id_usuario
+               ));
+
+               //retornando os dados para o controller
+
+               if($procedure[0]['ROW_COUNT()'] > 0){
+                return 'Email cadastrado com sucesso';
+               }else{
+                return 'Esse email já pertence a outro usuário';
+               }
+    }
     
     public static function search($_nome){
         $sql = new Sql();
