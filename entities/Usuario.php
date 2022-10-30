@@ -123,11 +123,11 @@
     }
 
     //Função para efetuar o login do usuário administrativo
-    public function efetuarLogin($_email, $_senha){
+    public function efetuarLogin($_loginUsuario, $_senha){
         $sql = new Sql();
 
-        $result = $sql->select("SELECT * FROM tbusuarios WHERE email_usuario = :EMAIL", array(
-            ":EMAIL"=>$_email
+        $result = $sql->select("SELECT * FROM tbusuarios WHERE login_usuario = :LOGIN", array(
+            ":LOGIN"=>$_loginUsuario
         ));
         if(count($result) > 0){
             if(password_verify($_senha, $result[0]['senha_usuario'])){
@@ -208,6 +208,14 @@
                 return 'Esse email já pertence a outro usuário';
                }
     }
+
+    //Função para atualizar o login do usuário
+    public static function atualizaUsuario($_id_usuariom, $_loginUsuario){
+        $sql = new Sql();
+
+        
+    }
+
     
     public static function search($_nome){
         $sql = new Sql();

@@ -172,7 +172,7 @@ if($postjson['requisicao'] == 'add'){
     else if($postjson['requisicao'] == 'login'){
         $usuario = new Usuario();
 
-        $usuario->efetuarLogin($postjson['email'], $postjson['senha']);
+        $usuario->efetuarLogin($postjson['login'], $postjson['senha']);
     
     
         $dados = array(

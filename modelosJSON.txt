@@ -172,4 +172,26 @@ LISTAR TODOS OS CLIENTES <-- OK
 }
 
 
+ATUALIZA EMAIL DO USUÁRIO <-- OK 
+
+  {
+    "requisicao": "atualizaEmail",
+    "id_usuario": 1,
+    "email_usuario": "aaa@teste"
+}
+
+
+ATUALIZA NOME DO USUÁRIO <-- OK 
+{
+  "requisicao": "atualizaNome",
+  "id_usuario": 1,
+  "nome_usuario": "testeNome"
+}
+
+
+ATUALIZA LOGIN DO USUÁRIO <--OK
+{
+  "requisicao": "atualizaL
+}
+
 
