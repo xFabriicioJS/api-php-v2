@@ -71,23 +71,55 @@ if($postjson['requisicao'] == 'add'){
     echo ($result);
 
     }
+    else if($postjson['requisicao'] == 'atualizaNome'){
+       
+        $res = Usuario::atualizaNome($postjson['id_usuario'], $postjson['nome_usuario']);
 
-    // else if($postjson['requisicao']=='editar'){
-    //     $query = $pdo->prepare("UPDATE usuarios SET nome=:nome, usuario=:usuario, senha= :senha, senha_original = :senha_original, nivel=:nivel WHERE id = :id");
-    //     $query->bindValue(":nome",$postjson['nome']);
-    //     $query->bindValue(":usuario",$postjson['usuario']);
-    //     $query->bindValue(":senha",$postjson['senha']);
-    //     $query->bindValue(":senha_original",$postjson['senha']);
-    //     $query->bindValue(":nivel",$postjson['nivel']);
-    //     $query->bindValue(":id",$postjson['id']);
-    //     $query->execute();
-    //     if ($query){
-    //         $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-    //     }else{
-    //         $result = json_encode(array('success'=>false,'msg'=>"Dados incorretos! Falha ao atualizar o usuário! (WRH014587)"));
-    //     }
-    //     echo $result;
-    // }
+        if($res){
+            $result = json_encode(array('success' => true, 'msg'=>"Nome alterado com sucesso!"));
+        }else{
+            $result = json_encode(array('success' => false, 'msg'=>"Não foi possível atualizar o nome"));
+        }
+        print $result;
+        
+    }
+
+    else if($postjson['requisicao'] == 'atualizaEmail'){
+        $user = new Usuario();
+        $user->loadById($postjson['id_usuario']);
+        $user->setEmail($postjson['email_usuario']);
+        $user->update();
+        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
+        echo $result;
+    }
+
+    else if($postjson['requisicao'] == 'atualizaNivel'){
+        $user = new Usuario();
+        $user->loadById($postjson['id_usuario']);
+        $user->setNivel($postjson['id_nivel_usuario']);
+        $user->update();
+        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
+        echo $result;
+    }
+
+    else if($postjson['requisicao'] == 'atualizaSenha'){
+        $user = new Usuario();
+        $user->loadById($postjson['id_usuario']);
+        $user->setSenha($postjson['senha_usuario']);
+        $user->update();
+        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
+        echo $result;
+    }
+
+    else if($postjson['requisicao'] == 'deletar'){
+        $user = new Usuario();
+        $user->loadById($postjson['id_usuario']);
+        $user->delete();
+        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
+        echo $result;
+
+    }
+
 
     else if($postjson['requisicao'] == 'findById'){
         $usuario = new Usuario();
@@ -102,6 +134,7 @@ if($postjson['requisicao'] == 'add'){
                 'id_nivel_usuario'=>$res[$i]['id_nivel_usuario'],
                 'senha_usuario'=>$res[$i]['senha_usuario'],
                 'foto_usuario'=>$res[$i]['foto_usuario'],
+                'login_usuario'=>$res[$i]['login_usuario'],
             );
         }
 

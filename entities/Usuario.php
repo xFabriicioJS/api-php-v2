@@ -176,6 +176,20 @@
         return $sql->select("SELECT * FROM tbusuarios ORDER BY nome_usuario");
     }
 
+    public static function atualizaNome($_idUsuario, $_novoNomeUsuario){
+        $sql = new Sql();
+
+        $sql->querySql("UPDATE tbusuarios SET nome_usuario = :NOME WHERE id_usuario = :ID", array(
+            ":NOME" => $_novoNomeUsuario,
+            ":ID" => $_idUsuario
+        ));
+
+        if($sql){
+            return true;
+        }
+        return false;
+    }
+
     
     public static function search($_nome){
         $sql = new Sql();
@@ -183,6 +197,8 @@
             ":NOME" => "%".$_nome."%"
         ));
     }
+
+   
 
 
 
