@@ -190,6 +190,8 @@
         return false;
     }
 
+    
+
     //Função para atualizar o email do usuário já vericando se o email já existe
     public static function atualizaEmail($_id_usuario, $_novoEmail){
         $sql = new Sql();
@@ -210,9 +212,21 @@
     }
 
     //Função para atualizar o login do usuário
-    public static function atualizaUsuario($_id_usuariom, $_loginUsuario){
+    public static function atualizaLoginUsuario($_id_usuario, $_loginUsuario){
         $sql = new Sql();
 
+        $procedure = $sql->select("CALL sp_usuario_update_login (:LOGINNOVO, :IDUSUARIO)", array(
+            ":LOGINNOVO" => $_loginUsuario,
+            ":IDUSUARIO" => $_id_usuario
+        ));
+
+        //retornando os dados para o controller
+
+        if($procedure[0]['ROW_COUNT()'] > 0){
+            return 'Login atualizado com sucesso';
+        }else{
+            return 'Esse login já pertence a outro usuário';
+        }
         
     }
 

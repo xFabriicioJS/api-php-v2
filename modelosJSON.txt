@@ -191,7 +191,8 @@ ATUALIZA NOME DO USUÁRIO <-- OK
 
 ATUALIZA LOGIN DO USUÁRIO <--OK
 {
-  "requisicao": "atualizaL
+    "requisicao": "atualizaLogin",
+    "id_usuario": 1,
+    "login_usuario": "testeLogin"
 }
-
 

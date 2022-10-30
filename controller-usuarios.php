@@ -97,6 +97,21 @@ if($postjson['requisicao'] == 'add'){
         print $result;
     }
 
+    else if($postjson['requisicao'] == 'atualizaLogin'){
+
+        $res = Usuario::atualizaLoginUsuario($postjson['id_usuario'], $postjson['login_usuario']);
+
+        if($res == 'Login atualizado com sucesso'){
+            $result = json_encode(array('success' => true, 'msg'=>"Login atualizado com sucesso!"));
+        }
+        else{
+            $result = json_encode(array('success' => false, 'msg'=>"Esse login já está cadastrado!"));
+        }
+
+        print $result;
+    }
+
+
     else if($postjson['requisicao'] == 'atualizaNivel'){
         $user = new Usuario();
         $user->loadById($postjson['id_usuario']);
