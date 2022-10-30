@@ -70,12 +70,14 @@
     public function loadById($id){
         $sql = new Sql();
 
-        $result = $sql->select("SELECT * FROM tbusuarios WHERE id = :ID", array(
+        $result = $sql->select("SELECT * FROM tbusuarios WHERE id_usuario = :ID", array(
             ":ID"=>$id
         ));
         if(count($result) > 0){
             $this->setData($result[0]);
         }
+
+        return $result;
     }
 
     //Função para setar Dados

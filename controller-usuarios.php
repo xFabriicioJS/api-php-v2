@@ -58,7 +58,8 @@ if($postjson['requisicao'] == 'add'){
             'nome_usuario'=>$res[$i]['nome_usuario'],
             'email_usuario'=>$res[$i]['email_usuario'],
             'id_nivel_usuario'=>$res[$i]['id_nivel_usuario'],
-            'senha_usuario'=>$res[$i]['senha_usuario']
+            'senha_usuario'=>$res[$i]['senha_usuario'],
+            'foto_usuario'=>$res[$i]['foto_usuario'],
         );
     }
     if(count($res)){
@@ -86,7 +87,32 @@ if($postjson['requisicao'] == 'add'){
     //         $result = json_encode(array('success'=>false,'msg'=>"Dados incorretos! Falha ao atualizar o usuário! (WRH014587)"));
     //     }
     //     echo $result;
-    // }s
+    // }
+
+    else if($postjson['requisicao'] == 'findById'){
+        $usuario = new Usuario();
+
+        $res = $usuario->loadById($postjson['id_usuario']);
+
+        for ($i = 0; $i < count($res); $i++){
+            $dados[][] = array(
+                'id_usuario'=>$res[$i]['id_usuario'],
+                'nome_usuario'=>$res[$i]['nome_usuario'],
+                'email_usuario'=>$res[$i]['email_usuario'],
+                'id_nivel_usuario'=>$res[$i]['id_nivel_usuario'],
+                'senha_usuario'=>$res[$i]['senha_usuario'],
+                'foto_usuario'=>$res[$i]['foto_usuario'],
+            );
+        }
+
+        if(count($res)){
+            $result = json_encode(array('success'=>true, 'result'=>$dados));
+        }else{
+            $result = json_encode(array('success'=>false, 'result'=>'0'));
+        }
+
+        echo ($result);
+    }
 
     else if($postjson['requisicao'] == 'excluir'){
 
