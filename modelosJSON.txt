@@ -196,3 +196,12 @@ ATUALIZA LOGIN DO USUÁRIO <--OK
     "login_usuario": "testeLogin"
 }
 
+ATUALIZA NIVEL DO USUÁRIO <-- OK
+
+{
+    "requisicao": "atualizaNivel",
+    "id_usuario": 1,
+    "id_nivel_usuario": 2
+}
+
+

@@ -113,30 +113,22 @@ if($postjson['requisicao'] == 'add'){
 
 
     else if($postjson['requisicao'] == 'atualizaNivel'){
-        $user = new Usuario();
-        $user->loadById($postjson['id_usuario']);
-        $user->setNivel($postjson['id_nivel_usuario']);
-        $user->update();
-        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-        echo $result;
+        
+        $res = Usuario::atualizaNivelUsuario($postjson['id_usuario'], $postjson['id_nivel_usuario']);
+
+        $result = json_encode(array('success' => true, 'msg'=>"Nível atualizado com sucesso!"));
+        
+        print $result;
+        
     }
 
     else if($postjson['requisicao'] == 'atualizaSenha'){
-        $user = new Usuario();
-        $user->loadById($postjson['id_usuario']);
-        $user->setSenha($postjson['senha_usuario']);
-        $user->update();
-        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-        echo $result;
-    }
-
-    else if($postjson['requisicao'] == 'deletar'){
-        $user = new Usuario();
-        $user->loadById($postjson['id_usuario']);
-        $user->delete();
-        $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-        echo $result;
-
+        // $user = new Usuario();
+        // $user->loadById($postjson['id_usuario']);
+        // $user->setSenha($postjson['senha_usuario']);
+        // $user->update();
+        // $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
+        // echo $result;
     }
 
 

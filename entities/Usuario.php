@@ -230,6 +230,21 @@
         
     }
 
+    //Função para atualizar o nível do usuário
+
+    public static function atualizaNivelUsuario($_id_usuario, $_nivelUsuario){
+        $sql = new Sql();
+
+        //Não vamos retornar nada pois essa requisição sempre será aceita
+
+        $sql->select("CALL sp_usuario_update_nivel (:NIVELNOVO, :IDUSUARIO)", array(
+            ":NIVELNOVO" => $_nivelUsuario,
+            ":IDUSUARIO" => $_id_usuario
+        ));
+
+    }
+
+
     
     public static function search($_nome){
         $sql = new Sql();
