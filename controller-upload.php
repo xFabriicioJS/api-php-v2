@@ -4,7 +4,7 @@
 
 
      $response = array();
-     $upload_dir = 'images/';
+     $upload_dir = '../AppWeb/src/img/fotos_de_tudo/';
      $server_url = 'localhost/api-php-v2/controller-upload.php';
      
      if($_FILES['avatar'])
