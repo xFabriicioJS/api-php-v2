@@ -97,8 +97,7 @@ class Clientes{
 
         //Precisaremos fazer uma INNER JOIN para trazer os dados do endereço do cliente
 
-
-        $result = $sql->select("SELECT tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.cpf_cliente, tbcliente.telefone_cliente, tbcliente.cnpj_cliente, tbcliente.razao_social_cliente, tbcliente.id_tipo_cliente, tbcliente.email_cliente, tbcliente.senha_cliente, tbcliente.foto_cliente, tbendereco.num_endereco, tbendereco.cep_endereco, tbendereco.complemento_endereco, tbendereco.logradouro_endereco, tbendereco.cidade_endereco from tbcliente INNER JOIN tbendereco ON tbcliente.id_cliente = tbendereco.id_cliente_endereco WHERE tbcliente.id_cliente = :ID", array(
+        $result = $sql->select("SELECT tbcliente.id_cliente, tbcliente.nome_cliente, tbcliente.cpf_cliente, tbcliente.telefone_cliente, tbcliente.cnpj_cliente, tbcliente.razao_social_cliente, tbcliente.id_tipo_cliente, tbcliente.email_cliente, tbcliente.senha_cliente, tbcliente.foto_cliente, tbcliente.id_contrato_cliente, tbendereco.num_endereco, tbendereco.cep_endereco, tbendereco.complemento_endereco, tbendereco.logradouro_endereco, tbendereco.cidade_endereco from tbcliente INNER JOIN tbendereco ON tbcliente.id_cliente = tbendereco.id_cliente_endereco WHERE tbcliente.id_cliente = :ID", array(
             ":ID"=>$id
         ));
         if(count($result) > 0){
@@ -126,8 +125,8 @@ class Clientes{
         $sql = new Sql();
 
 
-        //criando a procedure
-        $res = $sql->select("CALL sp_cliente_insert(:nome, :cpf, :telefone, :cnpj, :razaoSocial, :id_tipo, :email_cliente, :senha_cliente )", array(
+        //criando a procedure, para o cliente ser criado SEM CONTRATO
+        $res = $sql->select("CALL sp_cliente_insert(:nome, :cpf, :telefone, :cnpj, :razaoSocial, :id_tipo, 4, :email_cliente, :senha_cliente )", array(
             ":nome" => $this->getNome(),
             ":cpf" => $this->getCpf(),
             ":telefone" => $this->getTelefone(),
@@ -269,7 +268,7 @@ class Clientes{
                 ":IDCLIENTE" => $_id_cliente
                ));
 
-               if($res[0]['ROW_COUNT()'] > 0){
+               if($procedure[0]['ROW_COUNT()'] > 0){
                 return 'dados corretos';
                }else{
                 return 'Esse email já pertence a outro usuário';
@@ -311,7 +310,6 @@ class Clientes{
             }else{
                 return 'erro';
             }
-
         }
 
         public static function recuperaPlanoByIdCliente($_id_cliente){
