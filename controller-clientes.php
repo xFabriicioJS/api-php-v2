@@ -270,16 +270,22 @@ else if($postjson['requisicao'] == 'recuperarPlano'){
     }
 
     if(count($res)){
-        for ($i = 0; $i < count($res); $i++) {
-
-            $dados[][] = array(
-                'id_plano' => $res[$i]['id_plano_planos'],
-                'nome_plano' => $res[$i]['nome_plano_planos'],
-                'valor_plano' => $res[$i]['valor_plano']
-            );
-        }
-        $result = json_encode(array('success' => true, 'result' => $dados));
+        $result = json_encode(array('success' => true, 'result' => $res[0]));
     }
     
     echo ($result);
+}
+
+else if($postjson['requisicao'] == 'ativarPlano'){
+
+    $res = Clientes::ativarPlano($postjson['id_cliente'], $postjson['id_contrato']);
+
+    if($res == 'dados atualizados'){
+        $result = json_encode(array('success' => true, 'msg'=>"Plano ativado com sucesso!"));
+    }else{
+        $result = json_encode(array('success' => false, 'msg'=>"Não foi possível ativar o plano"));
+    }
+
+    print $result;
+
 }

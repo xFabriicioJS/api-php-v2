@@ -205,3 +205,10 @@ ATUALIZA NIVEL DO USUÁRIO <-- OK
 }
 
 
+ATUALIZA CONTRATO CLIENTE <-- OK
+
+{
+    "requisicao": "ativarPlano",
+    "id_cliente": 1,
+    "id_contrato": 3
+}

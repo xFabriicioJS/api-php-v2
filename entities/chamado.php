@@ -113,7 +113,17 @@ public static function getAllChamadosByCliente($id){
 
     return $results;
 }
+//Carregar os dados do histórico de chamados do cliente
+public function retrieveHistoricoChamado($_id){
+    $sql = new Sql();
+    $results = $sql->select("SELECT tbchamados.id_chamado, tbchamados.protocolo_chamado, tbchamados.descri_chamado, tbchamados.titulo_chamado, tbchamados.id_cliente_chamado, tbchamados.data_abertura_chamado, tbchamados.data_finalizacao_chamado, tbchamados.data_limite_chamado, tbchamados.foto_erro_chamado, tbchamados.status_chamado, tbchamados.prioridade_chamado, tbchamados.local_atend_chamado, hist_atend.id_hist_atend, hist_atend.id_chamado_hist_atend, hist_atend.id_usuario_hist_atend, hist_atend.comentario_hist, hist_atend.data_historico_chamado FROM tbchamados INNER JOIN hist_atend ON tbchamados.id_chamado = hist_atend.id_chamado_hist_atend WHERE id_chamado = :ID", array(
+        ":ID"=>$_id
+    ));
 
+    if(count($results) > 0){
+        $this->setData($results[0]);
+    }
+}
 
 
 //Carregar por id

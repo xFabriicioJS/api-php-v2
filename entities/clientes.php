@@ -315,7 +315,7 @@ class Clientes{
         public static function recuperaPlanoByIdCliente($_id_cliente){
             $sql = new Sql();
 
-            $res = $sql->select("SELECT * FROM tbplanos WHERE id_cliente_plano = :IDCLIENTE", array(
+            $res = $sql->select("SELECT id_contrato_cliente FROM tbcliente WHERE id_cliente = :IDCLIENTE", array(
                 ":IDCLIENTE" => $_id_cliente
             ));
 
@@ -323,5 +323,17 @@ class Clientes{
                 return $res;
             }
             return 'erro';
+        }
+
+        public static function ativarPlano($_id_cliente, $_id_contrato){
+            $sql = new Sql();
+
+            $sql->querySql("UPDATE tbcliente SET id_contrato_cliente = :IDCONTRATO WHERE id_cliente = :IDCLIENTE", array(
+                ":IDCONTRATO" => $_id_contrato,
+                ":IDCLIENTE" => $_id_cliente
+            ));
+
+            return 'dados atualizados';
+
         }
 }
