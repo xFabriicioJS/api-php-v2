@@ -127,8 +127,15 @@ class Descarte{
 
     }
 
-
-
+    //Função para cancelar o descarte
+    public static function cancelarDescarte($_id_descarte){
+        $sql = new Sql();
+        $sql->select("UPDATE tbdescarte SET status_descarte = 'Cancelado' WHERE id_descarte = :ID", array(
+            ":ID"=>$_id_descarte
+        ));
+        return 'Descarte cancelado';
+        
+    }
 
     //função responsável por listar os descartes de TODOS os clientes
 

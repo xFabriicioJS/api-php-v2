@@ -82,38 +82,68 @@ else if ($postjson['requisicao'] == 'listar') {
     echo ($result);
 }
 
-// else if($postjson['requisicao']=='editar'){
-//     $query = $pdo->prepare("UPDATE usuarios SET nome=:nome, usuario=:usuario, senha= :senha, senha_original = :senha_original, nivel=:nivel WHERE id = :id");
-//     $query->bindValue(":nome",$postjson['nome']);
-//     $query->bindValue(":usuario",$postjson['usuario']);
-//     $query->bindValue(":senha",$postjson['senha']);
-//     $query->bindValue(":senha_original",$postjson['senha']);
-//     $query->bindValue(":nivel",$postjson['nivel']);
-//     $query->bindValue(":id",$postjson['id']);
-//     $query->execute();
-//     if ($query){
-//         $result = json_encode(array('success'=>true, 'msg'=>"Deu tudo certo com alteração!"));
-//     }else{
-//         $result = json_encode(array('success'=>false,'msg'=>"Dados incorretos! Falha ao atualizar o usuário! (WRH014587)"));
-//     }
-//     echo $result;
-// }
+//Update status chamado, vamos atualizar o status do chamado e também vamos adicionar uma nova linha na tabela de histórico de chamado (hist_atend)
+else if($postjson['requisicao'] == 'updateStatus'){
 
-// else if ($postjson['requisicao'] == 'excluir') {
+    if($postjson['data_finalizacao'] !== null || $postjson['data_finalizacao'] !== ''){
+       $res = Chamado::updateStatus($postjson['id_chamado'], $postjson['status'], $postjson['id_usuario'], $postjson['comentario_hist'], $postjson['data_hist'], $postjson['data_finalizacao']);
+    }else{
+        $res = Chamado::updateStatus($postjson['id_chamado'], $postjson['status'], $postjson['id_usuario'], $postjson['comentario_hist'], $postjson['data_hist']);
+    }
 
+    if($res == 'Chamado atualizado.'){
+        $result = json_encode(array('success' => true, 'result' => $res));
+    }
+    else if($res == 'Chamado atualizado e finalizado.'){
+        $result = json_encode(array('success' => true, 'result' => $res));
+    }
+    else{
+        $result = json_encode(array('success' => false, 'result' => 'Ocorreu uma falha.'));
+    }
 
-//     $chamado = new Cliente();
-//     $chamado->setId($postjson['id_chamado']);
+    print($result);
+}
 
-//     $res = $cliente->delete();
+else if($postjson['requisicao'] == 'requestAllHistoricos'){
 
-//     if ($res) {
-//         $result = json_encode(array('success' => true, 'msg' => "Exclusão feita com sucesso"));
-//     } else {
-//         $result = json_encode(array('success' => false, 'msg' => "Dados incorretos"));
-//     }
-//     echo $result;
-// }
+    $res = Chamado::requestAllHistoricos($postjson['id_chamado']);
+
+    if ($res != null) {
+
+        for ($i = 0; $i < count($res); $i++) {
+
+            $dados[][] = array(
+                'id_hist_atend' => $res[$i]['id_hist_atend'],
+                'id_chamado' => $res[$i]['id_chamado_hist_atend'],
+                'id_usuario' => $res[$i]['id_usuario_hist_atend'],
+                'comentario' => $res[$i]['comentario_hist'],
+                'data_hist' => $res[$i]['data_historico_chamado'],
+            );
+        }
+
+        $result = json_encode(array('success' => true, 'result' => $dados));
+    } else {
+        $result = json_encode(array('success' => false, 'result' => '0'));
+    }
+
+    print $result;
+}
+
+//Cancelando o chamado pela visão do cliente
+else if($postjson['requisicao'] == 'cancelar'){
+
+    $res = Chamado::cancelar($postjson['id_chamado']);
+
+    if($res == 'Chamado cancelado'){
+        $result = json_encode(array('success' => true, 'result' => $res));
+    }
+    else{
+        $result = json_encode(array('success' => false, 'result' => 'Ocorreu uma falha.'));
+    }
+    print $result;
+
+}
+
 //final do excluir
 else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
 
@@ -156,4 +186,5 @@ else if ($postjson['requisicao'] == 'listarTodosPorCliente') {
     }
 
     echo ($result);
+
 }

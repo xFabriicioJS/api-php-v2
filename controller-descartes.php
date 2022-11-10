@@ -90,6 +90,20 @@ else if ($postjson['requisicao'] == 'listar') {
 // }
 //final do excluir
 
+//Cancelando o chamado pela visão do cliente
+else if($postjson['requisicao'] == 'cancelar'){
+
+    $res = Descarte::cancelarDescarte($postjson['id_descarte']);
+
+    if($res == 'Descarte cancelado'){
+        $result = json_encode(array('success' => true, 'result' => $res));
+    }
+    else{
+        $result = json_encode(array('success' => false, 'result' => 'Ocorreu uma falha.'));
+    }
+    print $result;
+
+}
 
 
 

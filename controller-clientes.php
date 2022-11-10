@@ -289,3 +289,4 @@ else if($postjson['requisicao'] == 'ativarPlano'){
     print $result;
 
 }
+

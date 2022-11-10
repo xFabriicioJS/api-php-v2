@@ -182,49 +182,54 @@ public function insert(){
 }
 
 
-//Função para atualizar o status do chamado
-public function update() : bool{
+
+public static function requestAllHistoricos($_id_chamado){
     $sql = new Sql();
-
-    // Pegando a senha que vier no json e codificando-a
-
-    $res = $sql->query("UPDATE tbclientes SET status_chamado = :STATUSCHAMADO WHERE id = :ID", array(
-        ":ID" => $this->getId(),
-        ":STATUSCHAMADO" => $this->getStatus()
+    $results = $sql->select("SELECT * FROM hist_atend where id_chamado_hist_atend = :ID", array(
+        ":ID"=>$_id_chamado
     ));
-
-    //Retornará um booleano para o controller
-    if($res){
-        return true;
-    }else{
-        return false;
+    if(count($results) > 0){
+     return $results;   
     }
 }
 
-//Função para atualizar/adicionar a data de finalização do chamado
-public function updateDataFinalizacao($_dataFinalizacao) : bool{
+//Função para cancelar o chamado, porém pelo cliente
+public static function cancelar($_id_chamado){
+    $sql = new Sql();
+    $sql->select("UPDATE tbchamados SET status_chamado = 'Cancelado' WHERE id_chamado = :ID", array(
+        ":ID"=>$_id_chamado
+    ));
+    return 'Chamado cancelado';
+}
+
+
+//Função para atualizar o status do chamado e adicionar uma nova linha no histórico de atendimento
+public static function updateStatus($_id_chamado, $_status, $_id_usuario, $_comentario_hist, $_data_hist, $_data_finalizacao = ""){
     $sql = new Sql();
 
-    //Gerando um objeto DateTime com a data que veio no parâmetro    
-    $dataAserFormatada  = new DateTime($_dataFinalizacao);
-    //Formatando a data para o formato do banco de dados
-    $dataFormatada = $dataAserFormatada->format("Y-m-d H:i:s");
-
-
-    
-
-    $res = $sql->query("UPDATE tbchamados SET data_finalizacao_chamado = :DATAFINALIZACAO WHERE id = :ID", array(
-        ":ID" => $this->getId(),
-        ":DATAFINALIZACAO" => $dataFormatada
+    if($_data_finalizacao == ""){
+        $sql->querySql("UPDATE tbchamados set status_chamado = :STATUSCHAMADO where id_chamado = :IDCHAMADO;
+        INSERT INTO hist_atend (id_chamado_hist_atend, id_usuario_hist_atend, comentario_hist, data_historico_chamado) values ($_id_chamado, $_id_usuario, '$_comentario_hist', '$_data_hist');
+    ", array(
+        ":IDCHAMADO" => $_id_chamado,
+        ":STATUSCHAMADO" => $_status
     ));
 
-    //Retornará um booleano para o controller
-    if($res){
-        return true;
+    return 'Chamado atualizado.';
+
     }else{
-        return false;
+        $sql->querySql("UPDATE tbchamados set status_chamado = :STATUSCHAMADO, data_finalizacao_chamado = :DATAFINALIZACAO where id_chamado = :IDCHAMADO;
+    INSERT INTO hist_atend (id_chamado_hist_atend, id_usuario_hist_atend, comentario_hist, data_historico_chamado) values ($_id_chamado, $_id_usuario, '$_comentario_hist', '$_data_hist');
+    ", array(
+        ":IDCHAMADO" => $_id_chamado,
+        ":STATUSCHAMADO" => $_status,
+        ":DATAFINALIZACAO" => $_data_finalizacao
+    ));
+
+    return 'Chamado atualizado e finalizado.';
+
     }
-} 
+}
 
 
 
